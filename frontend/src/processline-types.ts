@@ -49,6 +49,12 @@ export const DEFAULT_ITEM = (index: number): ProcessLineItem => ({
 
 export const clampPosition = (value: number) => Math.max(0, Math.min(1, value));
 
+export const positionToPercent = (position: number, edgePaddingPercent = 8) => {
+  const clampedPosition = clampPosition(position);
+  const usableRange = 100 - (edgePaddingPercent * 2);
+  return edgePaddingPercent + (clampedPosition * usableRange);
+};
+
 export const normalizePositions = (items: ProcessLineItem[]) => {
   if (items.length <= 1) {
     return items.map((item) => ({ ...item, position: 0.5 }));

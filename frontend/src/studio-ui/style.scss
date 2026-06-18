@@ -160,7 +160,7 @@
     .placement-shell {
         margin: 3rem 0 2rem;
         overflow-x: auto;
-        padding-bottom: 2rem;
+        padding: 3rem 0 3.5rem;
     }
 
     .placement-track {
@@ -179,6 +179,15 @@
         position: absolute;
         top: 50%;
         transform: translate(-50%, -50%);
+    }
+
+    .placement-marker.selected .placement-node {
+        border-color: #1d5e9d;
+        box-shadow: 0 0 0 0.28rem rgba(29, 94, 157, 0.15);
+    }
+
+    .placement-marker.selected .placement-label {
+        color: #1d5e9d;
     }
 
     .placement-node {
@@ -214,6 +223,37 @@
 
     .placement-marker.below .placement-label {
         top: 1.6rem;
+    }
+
+    .placement-detail-card {
+        background: #f8fbff;
+        border: 1px solid #d7e6f5;
+        border-radius: 0.75rem;
+        margin-bottom: 1.25rem;
+        padding: 1.25rem;
+    }
+
+    .placement-detail-eyebrow {
+        color: #1d5e9d;
+        font-size: 0.85rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        margin-bottom: 0.5rem;
+        text-transform: uppercase;
+    }
+
+    .placement-detail-title {
+        color: #001731;
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-bottom: 0.75rem;
+    }
+
+    .placement-detail-description {
+        color: #32415f;
+        line-height: 1.6;
+        margin-bottom: 0;
+        white-space: pre-wrap;
     }
 
     .editor-actions {

@@ -2,6 +2,7 @@ import * as React from 'react';
 import {
   ProcessLineConfiguration,
   ProcessLineItem,
+  positionToPercent,
   sortItemsByPosition,
 } from '../processline-types';
 
@@ -122,7 +123,7 @@ function StudentUi({ configuration }: StudentUiProps) {
   const getMarkerStyle = (item: ProcessLineItem, index: number) => {
     const selected = index === selectedIndex;
     return {
-      left: `${item.position * 100}%`,
+      left: `${positionToPercent(item.position)}%`,
       '--processline-highlight-color': configuration.styling.highlightColor,
       '--processline-title-color': selected
         ? configuration.styling.highlightColor
@@ -184,6 +185,7 @@ function StudentUi({ configuration }: StudentUiProps) {
                   style={getMarkerStyle(item, index)}
                   onPointerDown={(event) => event.stopPropagation()}
                   onClick={() => handleSelect(index)}
+                  onFocus={() => setSelectedIndex(index)}
                   aria-pressed={selected}
                 >
                   <span className="timeline-node" />
