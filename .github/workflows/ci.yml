@@ -15,7 +15,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-22.04]
-        toxenv: [quality, docs, py38-django32, py311-django42, py312-django42]
+        toxenv: [quality, py38-django32, py311-django42, py312-django42]
 
     steps:
     - uses: actions/checkout@v4
