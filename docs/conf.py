@@ -1,4 +1,3 @@
-# pylint: disable=invalid-name
 """
 xblock-processline documentation build configuration file.
 
@@ -88,7 +87,7 @@ top_level_doc = "index"
 
 # General information about the project.
 project = "xblock-processline"
-copyright = f"{datetime.now().year}, Axim Collaborative, Inc."  # pylint: disable=redefined-builtin
+copyright = f"{datetime.now().year}, Axim Collaborative, Inc."
 author = "Axim Collaborative, Inc."
 project_title = "xblock-processline"
 documentation_title = f"{project_title}"
@@ -516,7 +515,7 @@ intersphinx_mapping = {
 }
 
 
-def on_init(app):  # pylint: disable=unused-argument
+def on_init(app):
     """
     Run sphinx-apidoc after Sphinx initialization.
 

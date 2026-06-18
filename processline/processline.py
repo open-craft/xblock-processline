@@ -179,7 +179,7 @@ class ProcesslineXBlock(XBlock):
             "items": self._get_items(),
         }
 
-    def student_view(self, context=None):  # pylint: disable=unused-argument
+    def student_view(self, context=None):
         """
         Create primary view of the ProcesslineXBlock, shown to students when viewing courses.
         """
@@ -192,7 +192,7 @@ class ProcesslineXBlock(XBlock):
         return frag
 
     @XBlock.json_handler
-    def studio_save(self, data, suffix=""):  # pylint: disable=unused-argument
+    def studio_save(self, data, suffix=""):
         """Save config and data based on data received at this API endpoint."""
         try:
             self.display_name = (
@@ -208,7 +208,7 @@ class ProcesslineXBlock(XBlock):
 
         return {"result": "success", "configuration": self._initialization_data()}
 
-    def studio_view(self, context=None):  # pylint: disable=unused-argument
+    def studio_view(self, context=None):
         """
         Create primary view of the ProcesslineXBlock, shown to course authors in Studio.
         """
