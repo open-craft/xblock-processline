@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import StudioUi from './studio-ui';
+import '../student-ui/style.scss';
 import './style.scss';
 import {
   buildDefaultConfiguration,

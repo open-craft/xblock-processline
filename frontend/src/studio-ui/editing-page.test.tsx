@@ -3,7 +3,7 @@ import {
   describe, expect, it, vi,
 } from 'vitest';
 import {
-  render, screen,
+  render, screen, within,
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import EditingPage from './editing-page';
@@ -56,11 +56,14 @@ describe('EditingPage', () => {
     expect(screen.getByRole('button', { name: 'Step 4' })).toBeInTheDocument();
   });
 
-  it('updates the selected item details when a placement node is clicked', async () => {
+  it('reuses the student preview and syncs it with placement selection', async () => {
     const user = userEvent.setup();
+    const configuration = buildDefaultConfiguration();
+    configuration.items[2].description = 'Third description';
+
     render(
       <EditingPage
-        initialConfiguration={buildDefaultConfiguration()}
+        initialConfiguration={configuration}
         isSaving={false}
         saveError=""
         onCancel={vi.fn()}
@@ -74,6 +77,6 @@ describe('EditingPage', () => {
     await user.click(screen.getByRole('button', { name: 'Select Step 3' }));
 
     expect(screen.getByRole('button', { name: 'Select Step 3' })).toHaveAttribute('aria-pressed', 'true');
-    expect(screen.getByText('No description added yet.')).toBeInTheDocument();
+    expect(within(screen.getByLabelText('Student preview')).getByText('Third description')).toBeInTheDocument();
   });
 });
