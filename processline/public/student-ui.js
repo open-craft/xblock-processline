@@ -5168,7 +5168,6 @@ function _a({
     s > r.length - 1 && d(Math.max(r.length - 1, 0));
   }, [r.length, s, d]);
   const g = r[s], N = (p) => {
-    debugger;
     d(s + p);
   }, h = (p) => {
     const w = i.current;
@@ -5185,7 +5184,6 @@ function _a({
     h(s);
   }, [s]);
   const E = (p) => {
-    debugger;
     u.current.moved || d(p);
   }, C = (p) => {
     const w = i.current;

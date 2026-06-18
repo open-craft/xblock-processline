@@ -5168,7 +5168,6 @@ function La({
     s > r.length - 1 && f(Math.max(r.length - 1, 0));
   }, [r.length, s, f]);
   const S = r[s], j = (p) => {
-    debugger;
     f(s + p);
   }, h = (p) => {
     const x = o.current;
@@ -5185,7 +5184,6 @@ function La({
     h(s);
   }, [s]);
   const E = (p) => {
-    debugger;
     u.current.moved || f(p);
   }, N = (p) => {
     const x = o.current;
