@@ -61,3 +61,11 @@ indent = '    '
 line_length = 120
 multi_line_output = 3
 skip=["migrations"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py38"
+extend-exclude = ["processline_venv"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
