@@ -225,35 +225,22 @@
         top: 1.6rem;
     }
 
-    .placement-detail-card {
-        background: #f8fbff;
-        border: 1px solid #d7e6f5;
-        border-radius: 0.75rem;
+    .student-preview-section {
         margin-bottom: 1.25rem;
-        padding: 1.25rem;
     }
 
-    .placement-detail-eyebrow {
-        color: #1d5e9d;
-        font-size: 0.85rem;
-        font-weight: 700;
-        letter-spacing: 0.04em;
-        margin-bottom: 0.5rem;
-        text-transform: uppercase;
-    }
-
-    .placement-detail-title {
+    .student-preview-title {
         color: #001731;
         font-size: 1.25rem;
         font-weight: 700;
-        margin-bottom: 0.75rem;
+        margin-bottom: 1rem;
     }
 
-    .placement-detail-description {
-        color: #32415f;
-        line-height: 1.6;
-        margin-bottom: 0;
-        white-space: pre-wrap;
+    .student-preview-shell {
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 1rem;
+        overflow: hidden;
     }
 
     .editor-actions {

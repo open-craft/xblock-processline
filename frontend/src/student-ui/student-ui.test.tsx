@@ -58,4 +58,16 @@ describe('StudentUi', () => {
     expect(screen.getByText('Step 2 - Second label')).toBeInTheDocument();
     expect(screen.getByText('Second description')).toBeInTheDocument();
   });
+
+  it('supports a controlled selected item for shared LMS and CMS previews', () => {
+    render(
+      <StudentUi
+        configuration={configuration}
+        selectedIndex={1}
+      />,
+    );
+
+    expect(screen.getByText('Step 2 - Second label')).toBeInTheDocument();
+    expect(screen.getByText('Second description')).toBeInTheDocument();
+  });
 });

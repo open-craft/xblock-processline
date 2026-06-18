@@ -9,6 +9,7 @@ import {
   ProcessLineStyling,
   sortItemsByPosition,
 } from '../processline-types';
+import StudentUi from '../student-ui/student-ui';
 
 type EditorPage = 'basic' | 'styling' | 'items' | 'placement';
 
@@ -419,18 +420,16 @@ function EditingPage({
             ))}
           </div>
         </div>
-        {selectedItem && (
-          <section className="placement-detail-card" aria-label="Selected line item details">
-            <div className="placement-detail-eyebrow">Selected item</div>
-            <h4 className="placement-detail-title">
-              {selectedItem.title}
-              {selectedItem.label ? ` - ${selectedItem.label}` : ''}
-            </h4>
-            <p className="placement-detail-description">
-              {selectedItem.description || 'No description added yet.'}
-            </p>
-          </section>
-        )}
+        <section className="student-preview-section" aria-label="Student preview">
+          <h4 className="student-preview-title">Student preview</h4>
+          <div className="student-preview-shell">
+            <StudentUi
+              configuration={configuration}
+              selectedIndex={selectedItemIndex}
+              onSelectedIndexChange={setSelectedItemIndex}
+            />
+          </div>
+        </section>
         <button className="secondary-button evenly-space-button" type="button" onClick={setItemsEvenly}>
           Space items evenly
         </button>
