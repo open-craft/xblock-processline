@@ -1,12 +1,9 @@
-.. xblock-accordion documentation top level file, created by
-   sphinx-quickstart on Tue Jun 25 16:20:25 2024.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+.. xblock-processline documentation top level file.
 
-xblock-accordion
-================
+xblock-processline
+==================
 
-Accordion XBlock
+Processline XBlock
 
 Contents:
 

@@ -3,42 +3,39 @@
 Testing
 #######
 
-xblock-accordion has an assortment of test cases and code quality
-checks to catch potential problems during development.  To run them all in the
-version of Python you chose for your virtualenv:
+xblock-processline has Python, frontend, and documentation checks to catch
+potential problems during development.
+
+To run the full Python test matrix and repo checks:
 
 .. code-block:: bash
 
-    $ make validate
+    $ tox
 
-To run just the unit tests:
-
-.. code-block:: bash
-
-    $ make test
-
-To run just the unit tests and check diff coverage
+To run just the Python unit tests in your current environment:
 
 .. code-block:: bash
 
-    $ make diff_cover
+    $ pytest
 
-To run just the code quality checks:
-
-.. code-block:: bash
-
-    $ make quality
-
-To run the unit tests under every supported Python version and the code
-quality checks:
+To run just the Python code quality checks:
 
 .. code-block:: bash
 
-    $ make test-all
+    $ tox -e quality
 
-To generate and open an HTML report of how much of the code is covered by
-test cases:
+To build and validate the documentation:
 
 .. code-block:: bash
 
-    $ make coverage
+    $ tox -e docs
+
+To run the frontend checks:
+
+.. code-block:: bash
+
+    $ cd frontend
+    $ npm ci
+    $ npm run lint
+    $ npm run coverage
+    $ npm run check-build
