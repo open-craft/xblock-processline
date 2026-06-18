@@ -3,6 +3,7 @@ import {
   clampPosition,
   DEFAULT_ITEM,
   normalizePositions,
+  positionToPercent,
   ProcessLineConfiguration,
   ProcessLineItem,
   ProcessLineStyling,
@@ -122,6 +123,7 @@ function EditingPage({
     if (!track) {
       return;
     }
+    setSelectedItemIndex(index);
     event.preventDefault();
     const { pointerId } = event;
     const handleMove = (moveEvent: PointerEvent) => {
@@ -403,10 +405,13 @@ function EditingPage({
               <button
                 key={`${item.title}-${item.label}-${item.position}`}
                 type="button"
-                className={`placement-marker ${item.displayAboveLine ? 'above' : 'below'}`}
-                style={{ left: `${item.position * 100}%` }}
+                className={`placement-marker ${item.displayAboveLine ? 'above' : 'below'} ${index === selectedItemIndex ? 'selected' : ''}`}
+                style={{ left: `${positionToPercent(item.position)}%` }}
                 onPointerDown={(event) => handlePlacementDrag(index, event)}
-                aria-label={`Drag ${item.title || `Item ${index + 1}`}`}
+                onClick={() => setSelectedItemIndex(index)}
+                onFocus={() => setSelectedItemIndex(index)}
+                aria-label={`Select ${item.title || `Item ${index + 1}`}`}
+                aria-pressed={index === selectedItemIndex}
               >
                 <span className="placement-node" />
                 <span className="placement-label">{item.title || `Item ${index + 1}`}</span>
@@ -414,6 +419,18 @@ function EditingPage({
             ))}
           </div>
         </div>
+        {selectedItem && (
+          <section className="placement-detail-card" aria-label="Selected line item details">
+            <div className="placement-detail-eyebrow">Selected item</div>
+            <h4 className="placement-detail-title">
+              {selectedItem.title}
+              {selectedItem.label ? ` - ${selectedItem.label}` : ''}
+            </h4>
+            <p className="placement-detail-description">
+              {selectedItem.description || 'No description added yet.'}
+            </p>
+          </section>
+        )}
         <button className="secondary-button evenly-space-button" type="button" onClick={setItemsEvenly}>
           Space items evenly
         </button>

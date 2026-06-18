@@ -28,6 +28,7 @@
         display: flex;
         gap: 0.75rem;
         margin-bottom: 2.5rem;
+        min-height: 18rem;
     }
 
     .timeline-side-button,
@@ -56,7 +57,7 @@
         flex: 1 1 auto;
         overflow-x: auto;
         overflow-y: visible;
-        padding: 4.75rem 0 4.25rem;
+        padding: 6rem 0 5.5rem;
         scrollbar-width: thin;
         touch-action: pan-x;
 
@@ -67,6 +68,7 @@
 
     .timeline-canvas {
         margin: 0 auto;
+        min-height: 12rem;
         position: relative;
         width: 100%;
     }
@@ -116,7 +118,7 @@
         flex-direction: column;
         gap: 0.35rem;
         left: 50%;
-        max-width: 12rem;
+        max-width: 14rem;
         position: absolute;
         text-align: left;
         transform: translateX(-50%);
@@ -218,6 +220,10 @@
 
     @media (max-width: 768px) {
         padding: 1.25rem 0.75rem;
+
+        .processline-timeline-section {
+            min-height: 16rem;
+        }
 
         .processline-heading {
             font-size: 2rem;

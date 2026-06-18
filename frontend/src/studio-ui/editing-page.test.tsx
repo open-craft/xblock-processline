@@ -55,4 +55,25 @@ describe('EditingPage', () => {
 
     expect(screen.getByRole('button', { name: 'Step 4' })).toBeInTheDocument();
   });
+
+  it('updates the selected item details when a placement node is clicked', async () => {
+    const user = userEvent.setup();
+    render(
+      <EditingPage
+        initialConfiguration={buildDefaultConfiguration()}
+        isSaving={false}
+        saveError=""
+        onCancel={vi.fn()}
+        onSave={vi.fn()}
+      />,
+    );
+
+    await user.click(screen.getByRole('button', { name: 'Continue' }));
+    await user.click(screen.getByRole('button', { name: 'Continue' }));
+    await user.click(screen.getByRole('button', { name: 'Continue' }));
+    await user.click(screen.getByRole('button', { name: 'Select Step 3' }));
+
+    expect(screen.getByRole('button', { name: 'Select Step 3' })).toHaveAttribute('aria-pressed', 'true');
+    expect(screen.getByText('No description added yet.')).toBeInTheDocument();
+  });
 });
