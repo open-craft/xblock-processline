@@ -47,32 +47,32 @@ import 'tinymce/skins/content/default/content';
 import 'tinymce/skins/ui/oxide/content';
 
 interface TinyMceEditorProps {
-    value: string;
-    onChange: (value: string) => void;
+  value: string;
+  onChange: (value: string) => void;
 }
 
 function TinyMceEditor({ value, onChange }: TinyMceEditorProps) {
-    return (
-        <Editor
-            licenseKey="gpl"
-            value={value}
-            onEditorChange={(newValue) => onChange(newValue)}
-            init={{
-                promotion: false,
-                menubar: false,
-                plugins: [
-                    'advlist', 'autolink', 'lists', 'link', 'image',
-                    'searchreplace', 'visualblocks', 'code', 'fullscreen',
-                    'media', 'table', 'code', 'help',
-                ],
-                toolbar: [
-                    'undo redo | blocks | bold italic forecolor | alignleft aligncenter '
+  return (
+    <Editor
+      licenseKey="gpl"
+      value={value}
+      onEditorChange={(newValue) => onChange(newValue)}
+      init={{
+        promotion: false,
+        menubar: false,
+        plugins: [
+          'advlist', 'autolink', 'lists', 'link', 'image',
+          'searchreplace', 'visualblocks', 'code', 'fullscreen',
+          'media', 'table', 'code', 'help',
+        ],
+        toolbar: [
+          'undo redo | blocks | bold italic forecolor | alignleft aligncenter '
                     + 'alignright alignjustify | bullist numlist outdent indent | ',
-                    'link unlink | image media | table | removeformat | code | fullscreen | help',
-                ],
-            }}
-        />
-    );
+          'link unlink | image media | table | removeformat | code | fullscreen | help',
+        ],
+      }}
+    />
+  );
 }
 
 export default TinyMceEditor;

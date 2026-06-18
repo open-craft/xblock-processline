@@ -40,7 +40,7 @@ dependencies = [
 ]
 
 [project.entry-points."xblock.v1"]
-accordion = "processline:ProcesslineXBlock"
+processline = "processline:ProcesslineXBlock"
 
 [project.urls]
 Homepage = "https://github.com/open-craft/xblock-processline"
