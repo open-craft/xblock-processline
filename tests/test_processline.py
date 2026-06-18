@@ -2,6 +2,9 @@
 Tests for ProcesslineXBlock.
 """
 
+import json
+
+from webob import Request
 from xblock.field_data import DictFieldData
 from xblock.fields import ScopeIds
 from xblock.test.toy_runtime import ToyRuntime
@@ -16,11 +19,24 @@ def make_block(field_data=None):
     return ProcesslineXBlock(runtime, field_data or DictFieldData({}), scope_ids)
 
 
+def post_json(handler, payload):
+    """Call an XBlock JSON handler and decode the JSON response."""
+    request = Request.blank(
+        "/handler",
+        method="POST",
+        content_type="application/json",
+        body=json.dumps(payload).encode("utf-8"),
+    )
+    response = handler(request)
+    return json.loads(response.body.decode("utf-8"))
+
+
 def test_studio_save_persists_normalized_configuration():
     """The save handler should persist normalized styling and sorted items."""
     block = make_block()
 
-    response = block.studio_save(
+    response = post_json(
+        block.studio_save,
         {
             "displayName": "Updated Title",
             "introductionText": "Updated intro",
@@ -44,7 +60,7 @@ def test_studio_save_persists_normalized_configuration():
                     "position": 0.2,
                 },
             ],
-        }
+        },
     )
 
     assert response["result"] == "success"
@@ -59,6 +75,6 @@ def test_studio_save_requires_at_least_one_item():
     """Saving with no line items should fail cleanly."""
     block = make_block()
 
-    response = block.studio_save({"items": []})
+    response = post_json(block.studio_save, {"items": []})
 
     assert response["result"] == "error"
