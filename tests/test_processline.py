@@ -10,6 +10,7 @@ from xblock.fields import ScopeIds
 from xblock.test.toy_runtime import ToyRuntime
 
 from processline.processline import ProcesslineXBlock
+from processline.types import DEFAULT_STYLING
 
 
 def make_block(field_data=None):
@@ -78,3 +79,45 @@ def test_studio_save_requires_at_least_one_item():
     response = post_json(block.studio_save, {"items": []})
 
     assert response["result"] == "error"
+    assert response["message"] == "At least one line item is required."
+
+
+def test_initialization_data_normalizes_persisted_configuration():
+    """Initialization payloads should use the shared Pydantic configuration model."""
+    block = make_block(
+        DictFieldData(
+            {
+                "display_name": "Legacy Title",
+                "introduction_text": " Legacy intro ",
+                "styling": {
+                    "highlightColor": "invalid",
+                    "cardTitleFontSize": "28px",
+                },
+                "items": [
+                    {
+                        "title": "Step 2",
+                        "label": "Second",
+                        "description": "Second description",
+                        "displayAboveLine": False,
+                        "position": 3,
+                    },
+                    {
+                        "title": "Step 1",
+                        "label": "First",
+                        "description": "First description",
+                        "displayAboveLine": True,
+                        "position": -1,
+                    },
+                ],
+            }
+        )
+    )
+
+    configuration = block._initialization_data()
+
+    assert configuration["displayName"] == "Legacy Title"
+    assert configuration["introductionText"] == "Legacy intro"
+    assert configuration["styling"]["highlightColor"] == DEFAULT_STYLING["highlightColor"]
+    assert configuration["styling"]["cardTitleFontSize"] == 28
+    assert [item["title"] for item in configuration["items"]] == ["Step 1", "Step 2"]
+    assert [item["position"] for item in configuration["items"]] == [0.0, 1.0]
