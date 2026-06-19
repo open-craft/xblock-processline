@@ -3,5 +3,6 @@
 
 edx-i18n-tools
 importlib-resources
+pydantic < 3.0
 XBlock
 xblock-utils
