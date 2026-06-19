@@ -52,7 +52,7 @@ Local development
 Prerequisites
 =============
 
-- Python 3.8+
+- Python 3.11+
 - Node.js ``v18.20.3`` for the frontend (see ``frontend/.nvmrc``)
 - npm
 
@@ -105,7 +105,6 @@ Run the supported tox environments:
 
 .. code-block:: bash
 
-    tox -e py38-django32
     tox -e py311-django42
     tox -e py312-django42
     tox -e quality
