@@ -206,11 +206,15 @@ polib==1.2.0
 pycodestyle==2.12.1
     # via -r requirements/quality.txt
 pydantic==2.11.10
-    # via -r requirements/quality.txt
+    # via
+    #   -r requirements/quality.txt
+    #   pydantic-to-typescript
 pydantic-core==2.33.2
     # via
     #   -r requirements/quality.txt
     #   pydantic
+pydantic-to-typescript==2.0.0
+    # via -r requirements/dev.in
 pydocstyle==6.3.0
     # via -r requirements/quality.txt
 pygments==2.18.0

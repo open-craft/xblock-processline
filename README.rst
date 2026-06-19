@@ -68,6 +68,8 @@ The repository uses pinned requirements files.
     make requirements
 
 This installs the development environment from ``requirements/dev.txt``.
+It also provides ``pydantic2ts``, which the frontend build uses to generate
+TypeScript types from the backend Pydantic models.
 
 Set up frontend dependencies
 ============================
@@ -81,6 +83,10 @@ Frontend-only development
 =========================
 
 For faster UI iteration, run the frontend independently:
+
+Make sure your Python development environment is active first, because
+``npm run dev`` generates TypeScript types from ``processline/types.py`` before
+starting Vite.
 
 .. code-block:: bash
 
@@ -130,14 +136,17 @@ Run the frontend checks from ``frontend/``:
     npm run build
     npm run check-build
 
-``npm run check-build`` rebuilds the frontend bundles and fails if generated assets in
+``npm run check-build`` regenerates frontend types, rebuilds the frontend bundles,
+and fails if generated files in ``frontend/src/types.ts`` or
 ``processline/public/`` are out of date.
 
 Built assets
 ************
 
-Frontend source lives in ``frontend/src/``, but the XBlock serves the built assets from
-``processline/public/``. If you change frontend code, rebuild before opening a PR:
+Frontend source lives in ``frontend/src/``. The backend schema in
+``processline/types.py`` generates ``frontend/src/types.ts``, and the XBlock serves
+built assets from ``processline/public/``. If you change frontend code or the backend
+Pydantic models, rebuild before opening a PR:
 
 .. code-block:: bash
 
