@@ -7,7 +7,7 @@ import {
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import EditingPage from './editing-page';
-import { buildDefaultConfiguration } from '../processline-types';
+import { buildDefaultConfiguration } from '../processline-helpers';
 
 describe('EditingPage', () => {
   it('walks through the wizard and calls save on the placement page', async () => {

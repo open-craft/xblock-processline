@@ -3,10 +3,8 @@ import * as ReactDOM from 'react-dom';
 import StudioUi from './studio-ui';
 import '../student-ui/style.scss';
 import './style.scss';
-import {
-  buildDefaultConfiguration,
-  ProcessLineConfiguration,
-} from '../processline-types';
+import { buildDefaultConfiguration } from '../processline-helpers';
+import type { ProcessLineConfiguration } from '../processline-types';
 
 const buildConfigurationFromData = (data: XBlockData): ProcessLineConfiguration => {
   const defaultConfiguration = buildDefaultConfiguration();

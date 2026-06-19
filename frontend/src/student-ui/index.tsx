@@ -2,14 +2,12 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import StudentUi from './student-ui';
 import './style.scss';
-import {
-  buildDefaultConfiguration,
-  ProcessLineConfiguration,
-} from '../processline-types';
+import { buildDefaultConfiguration } from '../processline-helpers';
+import type { ProcessLineConfiguration } from '../processline-types';
 
 const buildConfigurationFromData = (data: XBlockData): ProcessLineConfiguration => ({
   ...buildDefaultConfiguration(),
-  displayName: data.displayName || 'Process Line Title',
+  displayName: data.displayName || 'Process Line',
   introductionText: data.introductionText || 'Click and drag to explore. Select an item for more details.',
   styling: {
     ...buildDefaultConfiguration().styling,

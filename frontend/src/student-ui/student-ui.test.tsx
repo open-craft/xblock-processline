@@ -8,7 +8,7 @@ import StudentUi from './student-ui';
 import {
   buildDefaultConfiguration,
   normalizePositions,
-} from '../processline-types';
+} from '../processline-helpers';
 
 const configuration = {
   ...buildDefaultConfiguration(),
@@ -34,7 +34,7 @@ describe('StudentUi', () => {
   it('renders the configured title and first detail card', () => {
     render(<StudentUi configuration={configuration} />);
 
-    expect(screen.getByText('Process Line Title')).toBeInTheDocument();
+    expect(screen.getByText('Process Line')).toBeInTheDocument();
     expect(screen.getByText('Step 1 - First label')).toBeInTheDocument();
     expect(screen.getByText('First description')).toBeInTheDocument();
   });
