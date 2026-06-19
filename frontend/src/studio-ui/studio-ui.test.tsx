@@ -5,7 +5,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import StudioUi from './studio-ui';
-import { buildDefaultConfiguration } from '../processline-types';
+import { buildDefaultConfiguration } from '../processline-helpers';
 
 let savedRequest: Record<string, unknown> | undefined;
 

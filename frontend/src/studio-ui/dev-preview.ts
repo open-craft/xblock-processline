@@ -1,5 +1,5 @@
 import { renderEditor } from './index';
-import { normalizePositions } from '../processline-types';
+import { normalizePositions } from '../processline-helpers';
 
 const mockRuntime: XBlockRuntime = {
   handlerUrl: (_element, action) => `/fake/${action}`,
@@ -8,7 +8,7 @@ const mockRuntime: XBlockRuntime = {
 };
 
 renderEditor(mockRuntime, document.querySelector('#root'), {
-  displayName: 'Process Line Title',
+  displayName: 'Process Line',
   introductionText: 'Click and drag to explore. Select an item for more details.',
   styling: {
     lineItemTitleColor: '#001731',

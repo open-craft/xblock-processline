@@ -4,10 +4,12 @@ import {
   DEFAULT_ITEM,
   normalizePositions,
   positionToPercent,
+  sortItemsByPosition,
+} from '../processline-helpers';
+import type {
   ProcessLineConfiguration,
   ProcessLineItem,
   ProcessLineStyling,
-  sortItemsByPosition,
 } from '../processline-types';
 import StudentUi from '../student-ui/student-ui';
 

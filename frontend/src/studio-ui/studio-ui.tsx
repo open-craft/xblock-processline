@@ -1,9 +1,7 @@
 import * as React from 'react';
 import EditingPage from './editing-page';
-import {
-  buildDefaultConfiguration,
-  ProcessLineConfiguration,
-} from '../processline-types';
+import { buildDefaultConfiguration } from '../processline-helpers';
+import type { ProcessLineConfiguration } from '../processline-types';
 
 interface StudioUiProps {
   initialConfiguration: ProcessLineConfiguration;

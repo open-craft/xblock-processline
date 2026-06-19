@@ -1,10 +1,6 @@
 import * as React from 'react';
-import {
-  ProcessLineConfiguration,
-  ProcessLineItem,
-  positionToPercent,
-  sortItemsByPosition,
-} from '../processline-types';
+import type { ProcessLineConfiguration, ProcessLineItem } from '../processline-types';
+import { positionToPercent, sortItemsByPosition } from '../processline-helpers';
 
 interface StudentUiProps {
   configuration: ProcessLineConfiguration;

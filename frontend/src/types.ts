@@ -8,16 +8,16 @@
 /**
  * Top-level process line configuration payload.
  */
-export interface ProcessLineConfigurationModel {
+export interface ProcessLineConfiguration {
   displayName?: string;
   introductionText?: string;
-  styling?: ProcessLineStylingModel;
-  items?: ProcessLineItemModel[];
+  styling?: ProcessLineStyling;
+  items?: ProcessLineItem[];
 }
 /**
  * Styling configuration for the process line.
  */
-export interface ProcessLineStylingModel {
+export interface ProcessLineStyling {
   lineItemTitleColor?: string;
   lineItemTitleFontSize?: number;
   lineItemLabelColor?: string;
@@ -32,7 +32,7 @@ export interface ProcessLineStylingModel {
 /**
  * One item on the process line.
  */
-export interface ProcessLineItemModel {
+export interface ProcessLineItem {
   title?: string;
   label?: string;
   description?: string;
