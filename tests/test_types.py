@@ -3,14 +3,14 @@
 from processline.types import (
     DEFAULT_DISPLAY_NAME,
     DEFAULT_STYLING,
-    ProcessLineConfigurationModel,
-    ProcessLineStylingModel,
+    ProcessLineConfiguration,
+    ProcessLineStyling,
 )
 
 
 def test_styling_model_normalizes_font_sizes_and_colors():
     """Styling model should preserve existing fallback behavior."""
-    styling = ProcessLineStylingModel.model_validate(
+    styling = ProcessLineStyling.model_validate(
         {
             "highlightColor": "#123456",
             "cardTitleFontSize": "28px",
@@ -25,7 +25,7 @@ def test_styling_model_normalizes_font_sizes_and_colors():
 
 def test_configuration_model_requires_items_and_sorts_them():
     """Configuration model should reject empty lists and sort saved items."""
-    config = ProcessLineConfigurationModel.model_validate(
+    config = ProcessLineConfiguration.model_validate(
         {
             "displayName": "  Updated Title  ",
             "items": [
@@ -41,7 +41,7 @@ def test_configuration_model_requires_items_and_sorts_them():
 
 def test_configuration_model_applies_item_fallbacks():
     """Configuration model should keep index-based defaults from normalizers."""
-    config = ProcessLineConfigurationModel.model_validate(
+    config = ProcessLineConfiguration.model_validate(
         {
             "displayName": "",
             "items": [

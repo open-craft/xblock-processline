@@ -12,7 +12,7 @@ from web_fragments.fragment import Fragment
 from xblock.core import XBlock
 from xblock.fields import Dict, List, Scope, String
 
-from .types import DEFAULT_INTRODUCTION_TEXT, DEFAULT_ITEMS, DEFAULT_STYLING, ProcessLineConfigurationModel
+from .types import DEFAULT_INTRODUCTION_TEXT, DEFAULT_ITEMS, DEFAULT_STYLING, ProcessLineConfiguration
 
 try:
     import importlib_resources
@@ -50,9 +50,9 @@ class ProcesslineXBlock(XBlock):
             messages.append(str(source_error or validation_error["msg"]))
         return "; ".join(messages)
 
-    def _configuration_model(self) -> ProcessLineConfigurationModel:
+    def _configuration_model(self) -> ProcessLineConfiguration:
         """Validate persisted field data with the shared configuration schema."""
-        return ProcessLineConfigurationModel.model_validate(
+        return ProcessLineConfiguration.model_validate(
             {
                 "displayName": self.display_name,
                 "introductionText": self.introduction_text,
@@ -80,7 +80,7 @@ class ProcesslineXBlock(XBlock):
     def studio_save(self, data, suffix=""):
         """Save config and data based on data received at this API endpoint."""
         try:
-            configuration = ProcessLineConfigurationModel.model_validate(data)
+            configuration = ProcessLineConfiguration.model_validate(data)
             self.display_name = configuration.displayName
             self.introduction_text = configuration.introductionText
             self.styling = configuration.styling.model_dump()

@@ -5137,7 +5137,7 @@ const Wf = {
   ...t,
   position: n / (e.length - 1)
 })), mo = (e) => [...e].sort((t, n) => t.position - n.position), Ta = () => ({
-  displayName: "Process Line Title",
+  displayName: "Process Line",
   introductionText: "Click and drag to explore. Select an item for more details.",
   styling: Wf,
   items: xr([

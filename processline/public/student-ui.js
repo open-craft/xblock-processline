@@ -5137,7 +5137,7 @@ const Dc = {
   ...t,
   position: n / (e.length - 1)
 })), Bc = (e) => [...e].sort((t, n) => t.position - n.position), Tl = () => ({
-  displayName: "Process Line Title",
+  displayName: "Process Line",
   introductionText: "Click and drag to explore. Select an item for more details.",
   styling: Dc,
   items: Vc([
@@ -5388,7 +5388,7 @@ _a.defaultProps = {
 };
 const Ac = (e) => ({
   ...Tl(),
-  displayName: e.displayName || "Process Line Title",
+  displayName: e.displayName || "Process Line",
   introductionText: e.introductionText || "Click and drag to explore. Select an item for more details.",
   styling: {
     ...Tl().styling,

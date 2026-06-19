@@ -74,7 +74,7 @@ def normalize_position(value: Any, fallback: float) -> float:
     return min(1.0, max(0.0, normalized))
 
 
-class ProcessLineItemModel(BaseModel):
+class ProcessLineItem(BaseModel):
     """One item on the process line."""
 
     model_config = ConfigDict(extra="ignore")
@@ -104,7 +104,7 @@ class ProcessLineItemModel(BaseModel):
         return normalize_position(value, 0.0)
 
 
-class ProcessLineStylingModel(BaseModel):
+class ProcessLineStyling(BaseModel):
     """Styling configuration for the process line."""
 
     model_config = ConfigDict(extra="ignore")
@@ -149,15 +149,15 @@ class ProcessLineStylingModel(BaseModel):
         return normalize_font_size(value, fallback)
 
 
-class ProcessLineConfigurationModel(BaseModel):
+class ProcessLineConfiguration(BaseModel):
     """Top-level process line configuration payload."""
 
     model_config = ConfigDict(extra="ignore")
 
     displayName: str = DEFAULT_DISPLAY_NAME
     introductionText: str = DEFAULT_INTRODUCTION_TEXT
-    styling: ProcessLineStylingModel = Field(default_factory=ProcessLineStylingModel)
-    items: list[ProcessLineItemModel] = Field(default_factory=list)
+    styling: ProcessLineStyling = Field(default_factory=ProcessLineStyling)
+    items: list[ProcessLineItem] = Field(default_factory=list)
 
     @field_validator("displayName", mode="before")
     @classmethod
@@ -203,7 +203,7 @@ class ProcessLineConfigurationModel(BaseModel):
         return normalized_items
 
     @model_validator(mode="after")
-    def sort_items(self) -> "ProcessLineConfigurationModel":
+    def sort_items(self) -> "ProcessLineConfiguration":
         """Sort items by position to match the persisted backend shape."""
         self.items = sorted(self.items, key=lambda item: item.position)
         return self
