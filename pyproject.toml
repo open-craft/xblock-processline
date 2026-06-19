@@ -8,7 +8,7 @@ dynamic = ["version"]
 description = "Process Line XBlock is an XBlock which is used to demonstrate how process steps evolves"
 readme = "README.rst"
 license = {file = "LICENSE.txt"}
-requires-python = ">=3.8"
+requires-python = ">=3.11"
 authors = [
     { name = "OpenCraft", email = "help+xblock@opencraft.com" },
 ]
@@ -64,7 +64,7 @@ skip=["migrations"]
 
 [tool.ruff]
 line-length = 120
-target-version = "py38"
+target-version = "py311"
 extend-exclude = ["processline_venv"]
 
 [tool.ruff.lint]
