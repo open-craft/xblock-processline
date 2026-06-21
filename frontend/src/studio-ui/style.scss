@@ -1,79 +1,65 @@
 @import "../index";
 
 .xblock-processline-editor {
-    color: #1f2937;
+    color: $gray-900;
     font-family: Arial, sans-serif;
 
     .editor-shell {
-        background: #ffffff;
-        border: 1px solid #d6d9e0;
-        padding: 1.5rem;
+        background: $white;
+        border: 1px solid $gray-200;
+        padding: $spacer * 1.5;
     }
 
     .editor-title {
-        font-size: 2rem;
-        font-weight: 600;
-        margin-bottom: 1.5rem;
+        font-size: $h2-font-size;
+        font-weight: $font-weight-bold;
+        margin-bottom: $spacer * 1.5;
     }
 
     .studio-page-content {
-        background: #ffffff;
-        border: 1px solid #ebedf2;
         min-height: 34rem;
-        padding: 1.75rem;
     }
 
-    .studio-field-group {
+    .studio-page-content + .studio-page-content,
+    .student-preview-section {
+        margin-top: $spacer * 1.5;
+    }
+
+    .form-stack {
         display: flex;
         flex-direction: column;
-        gap: 0.5rem;
-        margin-bottom: 1.5rem;
+        gap: $spacer * 1.5;
     }
 
-    label,
-    legend {
-        font-size: 1rem;
-        font-weight: 600;
-    }
-
-    input,
-    textarea {
-        border: 1px solid #c9ced8;
-        border-radius: 0;
-        font-size: 1rem;
-        padding: 0.8rem 0.9rem;
-        width: 100%;
-    }
-
-    textarea {
-        min-height: 8rem;
-        resize: vertical;
-    }
-
-    .field-hint,
     .placement-copy,
     .empty-editor-state {
-        color: #55647e;
-        font-size: 0.95rem;
-        line-height: 1.45;
+        color: $gray-600;
+        font-size: $font-size-base;
+        line-height: $line-height-base;
     }
 
-    .styling-page {
+    .styling-page,
+    .placement-page {
         display: flex;
         flex-direction: column;
-        gap: 2rem;
+        gap: $spacer * 1.5;
     }
 
-    .styling-section h3,
+    .section-title,
+    .placement-page h3,
+    .student-preview-title {
+        font-size: $h3-font-size;
+        font-weight: $font-weight-bold;
+    }
+
+    .section-title,
     .placement-page h3 {
-        font-size: 1.9rem;
-        font-weight: 700;
-        margin-bottom: 1.25rem;
+        margin-bottom: $spacer;
     }
 
     .style-grid {
         display: grid;
-        gap: 1.25rem;
+        gap: $spacer * 1.25;
     }
 
     .style-grid.two-column {
@@ -86,85 +72,88 @@
 
     .items-page {
         display: grid;
-        gap: 1.75rem;
+        gap: $spacer * 1.75;
         grid-template-columns: 20rem minmax(0, 1fr);
     }
 
     .items-sidebar {
-        border-right: 1px solid #e5e7eb;
-        padding-right: 1.5rem;
+        border-right: 1px solid $gray-200;
+        padding-right: $spacer * 1.5;
     }
 
     .add-item-button {
-        margin-bottom: 1.5rem;
+        margin-bottom: $spacer * 1.5;
         width: fit-content;
     }
 
     .items-list {
         display: flex;
         flex-direction: column;
-        gap: 0.5rem;
+        gap: $spacer * 0.5;
     }
 
     .item-row {
         align-items: center;
-        background: #ffffff;
+        background: $white;
+        border: 1px solid $gray-200;
+        border-radius: $border-radius;
         display: flex;
-        justify-content: space-between;
-        padding: 0.35rem 0.5rem;
+        gap: $spacer * 0.5;
+        padding: $spacer * 0.5;
     }
 
     .item-row.selected {
-        background: #f2efef;
-    }
-
-    .item-select-button,
-    .item-delete-button {
-        background: transparent;
-        border: none;
-        cursor: pointer;
-        font-size: 1rem;
+        background: $primary-100;
+        border-color: $primary-300;
     }
 
     .item-select-button {
         flex: 1 1 auto;
-        font-weight: 600;
-        padding: 0.5rem 0.75rem;
+        justify-content: flex-start;
         text-align: left;
     }
 
     .item-delete-button {
-        font-size: 1.1rem;
-        padding: 0.5rem;
+        flex: 0 0 auto;
     }
 
     .radio-field-group {
-        border: none;
-        margin: 0;
-        padding: 0;
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        gap: $spacer * 1.5;
+        padding: $spacer * 0.5 0;
     }
 
-    .radio-field-group label {
+    .radio-field-group .form-check {
         align-items: center;
         display: inline-flex;
-        font-weight: 400;
-        gap: 0.5rem;
-        margin-right: 1.5rem;
+        gap: $spacer * 0.5;
+        margin-bottom: 0;
+        min-height: auto;
+        padding: $spacer * 0.25 0;
+        padding-left: 0;
     }
 
-    .radio-field-group input {
+    .radio-field-group .form-check-input {
+        flex: 0 0 auto;
         margin: 0;
-        width: auto;
+        position: static;
+    }
+
+    .radio-field-group .form-check-label {
+        margin-bottom: 0;
+        padding-left: 0;
     }
 
     .placement-shell {
-        margin: 3rem 0 2rem;
+        margin: $spacer * 3 0 $spacer * 2;
         overflow-x: auto;
-        padding: 3rem 0 3.5rem;
+        padding: $spacer * 3 0 $spacer * 3.5;
     }
 
     .placement-track {
-        background: #d9dde7;
+        background: $gray-200;
         height: 0.25rem;
         min-width: 54rem;
         position: relative;
@@ -182,19 +171,19 @@
     }
 
     .placement-marker.selected .placement-node {
-        border-color: #1d5e9d;
-        box-shadow: 0 0 0 0.28rem rgba(29, 94, 157, 0.15);
+        border-color: $primary-500;
+        box-shadow: 0 0 0 0.28rem rgba($primary, 0.15);
     }
 
     .placement-marker.selected .placement-label {
-        color: #1d5e9d;
+        color: $primary-500;
     }
 
     .placement-node {
-        background: #ffffff;
-        border: 0.35rem solid #d9dde7;
-        border-radius: 999px;
-        box-shadow: 0 0 0 0.2rem #ffffff;
+        background: $white;
+        border: 0.35rem solid $gray-200;
+        border-radius: $rounded-pill;
+        box-shadow: 0 0 0 0.2rem $white;
         display: block;
         height: 1.5rem;
         left: 50%;
@@ -205,10 +194,10 @@
     }
 
     .placement-label {
-        color: #001731;
+        color: $primary-700;
         display: inline-block;
-        font-size: 1rem;
-        font-weight: 600;
+        font-size: $font-size-base;
+        font-weight: $font-weight-bold;
         left: 50%;
         max-width: 9rem;
         position: absolute;
@@ -225,62 +214,24 @@
         top: 1.6rem;
     }
 
-    .student-preview-section {
-        margin-bottom: 1.25rem;
-    }
-
     .student-preview-title {
-        color: #001731;
-        font-size: 1.25rem;
-        font-weight: 700;
-        margin-bottom: 1rem;
+        margin-bottom: 0;
     }
 
     .student-preview-shell {
-        background: #ffffff;
-        border: 1px solid #e5e7eb;
-        border-radius: 1rem;
         overflow: hidden;
+        padding: 0;
     }
 
     .editor-actions {
-        display: flex;
-        gap: 1rem;
-        margin-top: 1.5rem;
-    }
-
-    .primary-button,
-    .secondary-button,
-    .link-button {
-        border-radius: 0.25rem;
-        cursor: pointer;
-        font-size: 1rem;
-        padding: 0.8rem 1.2rem;
-    }
-
-    .primary-button {
-        background: #1d5e9d;
-        border: 1px solid #1d5e9d;
-        color: #ffffff;
-    }
-
-    .secondary-button {
-        background: #ffffff;
-        border: 1px solid #0f3f61;
-        color: #0f3f61;
-    }
-
-    .link-button {
-        background: transparent;
-        border: none;
-        color: #3f3f46;
-        padding-left: 0;
-        padding-right: 0;
+        background: $white;
+        bottom: 0;
+        margin-top: $spacer * 1.5;
+        z-index: 2;
     }
 
     .save-error {
-        color: #b42318;
-        margin-top: 1rem;
+        margin-top: $spacer * 1.5;
     }
 
     @media (max-width: 960px) {

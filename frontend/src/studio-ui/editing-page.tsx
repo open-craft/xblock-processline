@@ -1,5 +1,16 @@
 import * as React from 'react';
 import {
+  ActionRow,
+  Alert,
+  Button,
+  Card,
+  Form,
+  Icon,
+  IconButton,
+  Sticky,
+} from '@openedx/paragon';
+import { DeleteOutline } from '@openedx/paragon/icons';
+import {
   clampPosition,
   DEFAULT_ITEM,
   normalizePositions,
@@ -154,287 +165,291 @@ function EditingPage({
 
   const pages: Record<EditorPage, React.ReactNode> = {
     basic: (
-      <div className="studio-page-content">
-        <div className="studio-field-group">
-          <label htmlFor="processline-display-name">Display Name</label>
-          <input
-            id="processline-display-name"
-            type="text"
-            value={configuration.displayName}
-            onChange={(event) => updateConfiguration((currentConfiguration) => ({
-              ...currentConfiguration,
-              displayName: event.target.value,
-            }))}
-          />
-        </div>
-        <div className="studio-field-group">
-          <label htmlFor="processline-introduction-text">Introduction Text</label>
-          <textarea
-            id="processline-introduction-text"
-            rows={6}
-            value={configuration.introductionText}
-            onChange={(event) => updateConfiguration((currentConfiguration) => ({
-              ...currentConfiguration,
-              introductionText: event.target.value,
-            }))}
-          />
-        </div>
-      </div>
+      <Card className="studio-page-content">
+        <Card.Body>
+          <div className="form-stack">
+            <Form.Group controlId="processline-display-name">
+              <Form.Label>Display Name</Form.Label>
+              <Form.Control
+                type="text"
+                value={configuration.displayName}
+                onChange={(event) => updateConfiguration((currentConfiguration) => ({
+                  ...currentConfiguration,
+                  displayName: event.target.value,
+                }))}
+              />
+            </Form.Group>
+            <Form.Group className="mb-0" controlId="processline-introduction-text">
+              <Form.Label>Introduction Text</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={6}
+                value={configuration.introductionText}
+                onChange={(event) => updateConfiguration((currentConfiguration) => ({
+                  ...currentConfiguration,
+                  introductionText: event.target.value,
+                }))}
+              />
+            </Form.Group>
+          </div>
+        </Card.Body>
+      </Card>
     ),
     styling: (
-      <div className="studio-page-content styling-page">
-        <section className="styling-section">
-          <h3>Styling of Line Items</h3>
-          <div className="style-grid two-column">
-            <div className="studio-field-group">
-              <label htmlFor="lineItemTitleColor">Title text color</label>
-              <input
-                id="lineItemTitleColor"
-                type="text"
-                value={configuration.styling.lineItemTitleColor}
-                onChange={(event) => updateStyling('lineItemTitleColor', event.target.value)}
-              />
+      <div className="styling-page">
+        <Card className="studio-page-content">
+          <Card.Body>
+            <h3 className="section-title">Styling of Line Items</h3>
+            <div className="style-grid two-column">
+              <Form.Group controlId="lineItemTitleColor">
+                <Form.Label>Title text color</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={configuration.styling.lineItemTitleColor}
+                  onChange={(event) => updateStyling('lineItemTitleColor', event.target.value)}
+                />
+              </Form.Group>
+              <Form.Group controlId="lineItemTitleFontSize">
+                <Form.Label>Title font size</Form.Label>
+                <Form.Control
+                  type="number"
+                  min={1}
+                  value={configuration.styling.lineItemTitleFontSize}
+                  onChange={(event) => updateStyling('lineItemTitleFontSize', Number(event.target.value) || 1)}
+                />
+              </Form.Group>
+              <Form.Group controlId="lineItemLabelColor">
+                <Form.Label>Label text color</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={configuration.styling.lineItemLabelColor}
+                  onChange={(event) => updateStyling('lineItemLabelColor', event.target.value)}
+                />
+              </Form.Group>
+              <Form.Group controlId="lineItemLabelFontSize">
+                <Form.Label>Label font size</Form.Label>
+                <Form.Control
+                  type="number"
+                  min={1}
+                  value={configuration.styling.lineItemLabelFontSize}
+                  onChange={(event) => updateStyling('lineItemLabelFontSize', Number(event.target.value) || 1)}
+                />
+              </Form.Group>
+              <Form.Group className="single-span mb-0" controlId="highlightColor">
+                <Form.Label>Highlight color</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={configuration.styling.highlightColor}
+                  onChange={(event) => updateStyling('highlightColor', event.target.value)}
+                />
+                <Form.Text muted>
+                  Color of the title, dot, and progress pill when selected.
+                </Form.Text>
+              </Form.Group>
             </div>
-            <div className="studio-field-group">
-              <label htmlFor="lineItemTitleFontSize">Title font size</label>
-              <input
-                id="lineItemTitleFontSize"
-                type="number"
-                min={1}
-                value={configuration.styling.lineItemTitleFontSize}
-                onChange={(event) => updateStyling('lineItemTitleFontSize', Number(event.target.value) || 1)}
-              />
+          </Card.Body>
+        </Card>
+        <Card className="studio-page-content">
+          <Card.Body>
+            <h3 className="section-title">Styling of Cards</h3>
+            <div className="style-grid two-column">
+              <Form.Group className="single-span" controlId="cardBackgroundColor">
+                <Form.Label>Card background color</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={configuration.styling.cardBackgroundColor}
+                  onChange={(event) => updateStyling('cardBackgroundColor', event.target.value)}
+                />
+              </Form.Group>
+              <Form.Group controlId="cardTitleColor">
+                <Form.Label>Title text color</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={configuration.styling.cardTitleColor}
+                  onChange={(event) => updateStyling('cardTitleColor', event.target.value)}
+                />
+              </Form.Group>
+              <Form.Group controlId="cardTitleFontSize">
+                <Form.Label>Title font size</Form.Label>
+                <Form.Control
+                  type="number"
+                  min={1}
+                  value={configuration.styling.cardTitleFontSize}
+                  onChange={(event) => updateStyling('cardTitleFontSize', Number(event.target.value) || 1)}
+                />
+              </Form.Group>
+              <Form.Group controlId="cardDescriptionColor">
+                <Form.Label>Description text color</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={configuration.styling.cardDescriptionColor}
+                  onChange={(event) => updateStyling('cardDescriptionColor', event.target.value)}
+                />
+              </Form.Group>
+              <Form.Group className="mb-0" controlId="cardDescriptionFontSize">
+                <Form.Label>Description font size</Form.Label>
+                <Form.Control
+                  type="number"
+                  min={1}
+                  value={configuration.styling.cardDescriptionFontSize}
+                  onChange={(event) => updateStyling('cardDescriptionFontSize', Number(event.target.value) || 1)}
+                />
+              </Form.Group>
             </div>
-            <div className="studio-field-group">
-              <label htmlFor="lineItemLabelColor">Label text color</label>
-              <input
-                id="lineItemLabelColor"
-                type="text"
-                value={configuration.styling.lineItemLabelColor}
-                onChange={(event) => updateStyling('lineItemLabelColor', event.target.value)}
-              />
-            </div>
-            <div className="studio-field-group">
-              <label htmlFor="lineItemLabelFontSize">Label font size</label>
-              <input
-                id="lineItemLabelFontSize"
-                type="number"
-                min={1}
-                value={configuration.styling.lineItemLabelFontSize}
-                onChange={(event) => updateStyling('lineItemLabelFontSize', Number(event.target.value) || 1)}
-              />
-            </div>
-            <div className="studio-field-group single-span">
-              <label htmlFor="highlightColor">Highlight color</label>
-              <input
-                id="highlightColor"
-                type="text"
-                value={configuration.styling.highlightColor}
-                onChange={(event) => updateStyling('highlightColor', event.target.value)}
-              />
-              <span className="field-hint">Color of the title, dot, and progress pill when selected.</span>
-            </div>
-          </div>
-        </section>
-        <section className="styling-section">
-          <h3>Styling of Cards</h3>
-          <div className="style-grid two-column">
-            <div className="studio-field-group single-span">
-              <label htmlFor="cardBackgroundColor">Card background color</label>
-              <input
-                id="cardBackgroundColor"
-                type="text"
-                value={configuration.styling.cardBackgroundColor}
-                onChange={(event) => updateStyling('cardBackgroundColor', event.target.value)}
-              />
-            </div>
-            <div className="studio-field-group">
-              <label htmlFor="cardTitleColor">Title text color</label>
-              <input
-                id="cardTitleColor"
-                type="text"
-                value={configuration.styling.cardTitleColor}
-                onChange={(event) => updateStyling('cardTitleColor', event.target.value)}
-              />
-            </div>
-            <div className="studio-field-group">
-              <label htmlFor="cardTitleFontSize">Title font size</label>
-              <input
-                id="cardTitleFontSize"
-                type="number"
-                min={1}
-                value={configuration.styling.cardTitleFontSize}
-                onChange={(event) => updateStyling('cardTitleFontSize', Number(event.target.value) || 1)}
-              />
-            </div>
-            <div className="studio-field-group">
-              <label htmlFor="cardDescriptionColor">Description text color</label>
-              <input
-                id="cardDescriptionColor"
-                type="text"
-                value={configuration.styling.cardDescriptionColor}
-                onChange={(event) => updateStyling('cardDescriptionColor', event.target.value)}
-              />
-            </div>
-            <div className="studio-field-group">
-              <label htmlFor="cardDescriptionFontSize">Description font size</label>
-              <input
-                id="cardDescriptionFontSize"
-                type="number"
-                min={1}
-                value={configuration.styling.cardDescriptionFontSize}
-                onChange={(event) => updateStyling('cardDescriptionFontSize', Number(event.target.value) || 1)}
-              />
-            </div>
-          </div>
-        </section>
+          </Card.Body>
+        </Card>
       </div>
     ),
     items: (
-      <div className="studio-page-content items-page">
-        <aside className="items-sidebar">
-          <button className="primary-button add-item-button" type="button" onClick={addItem}>
-            + Add line item
-          </button>
-          <div className="items-list">
-            {configuration.items.map((item, index) => (
-              <div
-                key={`${item.title}-${item.label}-${item.position}`}
-                className={`item-row ${index === selectedItemIndex ? 'selected' : ''}`}
-              >
-                <button
-                  type="button"
-                  className="item-select-button"
-                  onClick={() => setSelectedItemIndex(index)}
+      <Card className="studio-page-content">
+        <Card.Body className="items-page">
+          <aside className="items-sidebar">
+            <Button className="add-item-button" type="button" onClick={addItem}>
+              + Add line item
+            </Button>
+            <div className="items-list">
+              {configuration.items.map((item, index) => (
+                <div
+                  key={`${item.title}-${item.label}-${item.position}`}
+                  className={`item-row ${index === selectedItemIndex ? 'selected' : ''}`}
                 >
-                  {item.title || `Item ${index + 1}`}
-                </button>
-                <button
-                  type="button"
-                  className="item-delete-button"
-                  onClick={() => deleteItem(index)}
-                  aria-label={`Delete ${item.title || `Item ${index + 1}`}`}
-                >
-                  🗑
-                </button>
+                  <Button
+                    className="item-select-button"
+                    type="button"
+                    variant={index === selectedItemIndex ? 'primary' : 'tertiary'}
+                    onClick={() => setSelectedItemIndex(index)}
+                  >
+                    {item.title || `Item ${index + 1}`}
+                  </Button>
+                  <IconButton
+                    className="item-delete-button"
+                    src={DeleteOutline}
+                    iconAs={Icon}
+                    variant="danger"
+                    alt={`Delete ${item.title || `Item ${index + 1}`}`}
+                    onClick={() => deleteItem(index)}
+                  />
+                </div>
+              ))}
+            </div>
+          </aside>
+          <div className="item-editor-panel">
+            {selectedItem ? (
+              <div className="form-stack">
+                <Form.Group controlId="lineItemTitle">
+                  <Form.Label>Title</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={selectedItem.title}
+                    onChange={(event) => updateSelectedItem((currentItem) => ({
+                      ...currentItem,
+                      title: event.target.value,
+                    }))}
+                  />
+                </Form.Group>
+                <Form.Group controlId="lineItemLabel">
+                  <Form.Label>Label</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={selectedItem.label}
+                    onChange={(event) => updateSelectedItem((currentItem) => ({
+                      ...currentItem,
+                      label: event.target.value,
+                    }))}
+                  />
+                </Form.Group>
+                <Form.Group controlId="lineItemDescription">
+                  <Form.Label>Description</Form.Label>
+                  <Form.Control
+                    as="textarea"
+                    rows={6}
+                    value={selectedItem.description}
+                    onChange={(event) => updateSelectedItem((currentItem) => ({
+                      ...currentItem,
+                      description: event.target.value,
+                    }))}
+                  />
+                </Form.Group>
+                <Form.Group className="mb-0">
+                  <Form.Label>Label placement</Form.Label>
+                  <div className="radio-field-group">
+                    <Form.Check
+                      id={`displayAboveLine-${selectedItemIndex}`}
+                      type="radio"
+                      name="labelPlacement"
+                      label="Display above line"
+                      checked={selectedItem.displayAboveLine}
+                      onChange={() => updateSelectedItem((currentItem) => ({
+                        ...currentItem,
+                        displayAboveLine: true,
+                      }))}
+                    />
+                    <Form.Check
+                      id={`displayBelowLine-${selectedItemIndex}`}
+                      type="radio"
+                      name="labelPlacement"
+                      label="Display below line"
+                      checked={!selectedItem.displayAboveLine}
+                      onChange={() => updateSelectedItem((currentItem) => ({
+                        ...currentItem,
+                        displayAboveLine: false,
+                      }))}
+                    />
+                  </div>
+                </Form.Group>
               </div>
-            ))}
+            ) : (
+              <Alert variant="light" className="mb-0 empty-editor-state">
+                Add a line item to begin configuring the process line.
+              </Alert>
+            )}
           </div>
-        </aside>
-        <div className="item-editor-panel">
-          {selectedItem ? (
-            <>
-              <div className="studio-field-group">
-                <label htmlFor="lineItemTitle">Title</label>
-                <input
-                  id="lineItemTitle"
-                  type="text"
-                  value={selectedItem.title}
-                  onChange={(event) => updateSelectedItem((currentItem) => ({
-                    ...currentItem,
-                    title: event.target.value,
-                  }))}
-                />
-              </div>
-              <div className="studio-field-group">
-                <label htmlFor="lineItemLabel">Label</label>
-                <input
-                  id="lineItemLabel"
-                  type="text"
-                  value={selectedItem.label}
-                  onChange={(event) => updateSelectedItem((currentItem) => ({
-                    ...currentItem,
-                    label: event.target.value,
-                  }))}
-                />
-              </div>
-              <div className="studio-field-group">
-                <label htmlFor="lineItemDescription">Description</label>
-                <textarea
-                  id="lineItemDescription"
-                  rows={6}
-                  value={selectedItem.description}
-                  onChange={(event) => updateSelectedItem((currentItem) => ({
-                    ...currentItem,
-                    description: event.target.value,
-                  }))}
-                />
-              </div>
-              <fieldset className="radio-field-group">
-                <legend>Label placement</legend>
-                <label htmlFor={`displayAboveLine-${selectedItemIndex}`}>
-                  <input
-                    id={`displayAboveLine-${selectedItemIndex}`}
-                    type="radio"
-                    name="labelPlacement"
-                    checked={selectedItem.displayAboveLine}
-                    onChange={() => updateSelectedItem((currentItem) => ({
-                      ...currentItem,
-                      displayAboveLine: true,
-                    }))}
-                  />
-                  Display above line
-                </label>
-                <label htmlFor={`displayBelowLine-${selectedItemIndex}`}>
-                  <input
-                    id={`displayBelowLine-${selectedItemIndex}`}
-                    type="radio"
-                    name="labelPlacement"
-                    checked={!selectedItem.displayAboveLine}
-                    onChange={() => updateSelectedItem((currentItem) => ({
-                      ...currentItem,
-                      displayAboveLine: false,
-                    }))}
-                  />
-                  Display below line
-                </label>
-              </fieldset>
-            </>
-          ) : (
-            <div className="empty-editor-state">Add a line item to begin configuring the process line.</div>
-          )}
-        </div>
-      </div>
+        </Card.Body>
+      </Card>
     ),
     placement: (
-      <div className="studio-page-content placement-page">
-        <h3>Placement of Line Items</h3>
-        <p className="placement-copy">
-          Drag items to position them along the line. Use the button below to space them evenly.
-        </p>
-        <div className="placement-shell">
-          <div ref={placementTrackRef} className="placement-track">
-            {sortItemsByPosition(configuration.items).map((item, index) => (
-              <button
-                key={`${item.title}-${item.label}-${item.position}`}
-                type="button"
-                className={`placement-marker ${item.displayAboveLine ? 'above' : 'below'} ${index === selectedItemIndex ? 'selected' : ''}`}
-                style={{ left: `${positionToPercent(item.position)}%` }}
-                onPointerDown={(event) => handlePlacementDrag(index, event)}
-                onClick={() => setSelectedItemIndex(index)}
-                onFocus={() => setSelectedItemIndex(index)}
-                aria-label={`Select ${item.title || `Item ${index + 1}`}`}
-                aria-pressed={index === selectedItemIndex}
-              >
-                <span className="placement-node" />
-                <span className="placement-label">{item.title || `Item ${index + 1}`}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-        <section className="student-preview-section" aria-label="Student preview">
-          <h4 className="student-preview-title">Student preview</h4>
-          <div className="student-preview-shell">
+      <div className="placement-page">
+        <Card className="studio-page-content placement-card">
+          <Card.Body>
+            <h3>Placement of Line Items</h3>
+            <p className="placement-copy">
+              Drag items to position them along the line. Use the button below to space them evenly.
+            </p>
+            <div className="placement-shell">
+              <div ref={placementTrackRef} className="placement-track">
+                {sortItemsByPosition(configuration.items).map((item, index) => (
+                  <button
+                    key={`${item.title}-${item.label}-${item.position}`}
+                    type="button"
+                    className={`placement-marker ${item.displayAboveLine ? 'above' : 'below'} ${index === selectedItemIndex ? 'selected' : ''}`}
+                    style={{ left: `${positionToPercent(item.position)}%` }}
+                    onPointerDown={(event) => handlePlacementDrag(index, event)}
+                    onClick={() => setSelectedItemIndex(index)}
+                    onFocus={() => setSelectedItemIndex(index)}
+                    aria-label={`Select ${item.title || `Item ${index + 1}`}`}
+                    aria-pressed={index === selectedItemIndex}
+                  >
+                    <span className="placement-node" />
+                    <span className="placement-label">{item.title || `Item ${index + 1}`}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+            <Button variant="outline-primary" type="button" onClick={setItemsEvenly}>
+              Space items evenly
+            </Button>
+          </Card.Body>
+        </Card>
+        <Card as="section" className="student-preview-section" aria-label="Student preview">
+          <Card.Body className="student-preview-shell">
+            <h4 className="student-preview-title">Student preview</h4>
             <StudentUi
               configuration={configuration}
               selectedIndex={selectedItemIndex}
               onSelectedIndexChange={setSelectedItemIndex}
             />
-          </div>
-        </section>
-        <button className="secondary-button evenly-space-button" type="button" onClick={setItemsEvenly}>
-          Space items evenly
-        </button>
+          </Card.Body>
+        </Card>
       </div>
     ),
   };
@@ -473,25 +488,32 @@ function EditingPage({
       <div className="editor-shell">
         <h2 className="editor-title">Editing: Process Line</h2>
         {pages[page]}
-        {saveError && <div className="save-error" role="alert">{saveError}</div>}
-        <div className="editor-actions">
-          <button
-            className="primary-button"
-            type="button"
-            onClick={nextButton.onClick}
-            disabled={isSaving || (page === 'items' && !configuration.items.length)}
-          >
-            {isSaving ? 'Saving…' : nextButton.label}
-          </button>
-          {page !== 'basic' && (
-            <button className="secondary-button" type="button" onClick={handleBack} disabled={isSaving}>
-              Back
-            </button>
-          )}
-          <button className="link-button" type="button" onClick={onCancel} disabled={isSaving}>
-            Cancel
-          </button>
-        </div>
+        {saveError && (
+          <Alert className="save-error" variant="danger">
+            {saveError}
+          </Alert>
+        )}
+        <Sticky position="bottom" className="editor-actions border-top p-3">
+          <ActionRow>
+            <ActionRow.Spacer />
+            <Button variant="tertiary" type="button" onClick={onCancel} disabled={isSaving}>
+              Cancel
+            </Button>
+            {page !== 'basic' && (
+              <Button variant="outline-primary" type="button" onClick={handleBack} disabled={isSaving}>
+                Back
+              </Button>
+            )}
+            <Button
+              variant="primary"
+              type="button"
+              onClick={nextButton.onClick}
+              disabled={isSaving || (page === 'items' && !configuration.items.length)}
+            >
+              {isSaving ? 'Saving…' : nextButton.label}
+            </Button>
+          </ActionRow>
+        </Sticky>
       </div>
     </div>
   );
