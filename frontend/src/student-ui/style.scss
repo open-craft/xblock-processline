@@ -170,7 +170,11 @@
     }
 
     .processline-detail-card .pgn__card-body {
+        display: flex;
+        flex-direction: column;
+        max-width: 100%;
         padding: $spacer * 2;
+        width: auto;
     }
 
     .detail-progress-pill {
@@ -215,7 +219,6 @@
         flex: 0 0 auto;
         gap: $spacer * 0.75;
         margin-left: auto;
-        padding-right: $spacer * 0.5;
     }
 
     .detail-nav-button {
