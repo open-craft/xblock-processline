@@ -1,4 +1,11 @@
 import * as React from 'react';
+import {
+  Badge,
+  Card,
+  Icon,
+  IconButton,
+} from '@openedx/paragon';
+import { ChevronLeft, ChevronRight } from '@openedx/paragon/icons';
 import type { ProcessLineConfiguration, ProcessLineItem } from '../processline-types';
 import { positionToPercent, sortItemsByPosition } from '../processline-helpers';
 
@@ -149,9 +156,15 @@ function StudentUi({
   if (!items.length) {
     return (
       <div className="xblock-processline student-view empty-state">
-        <h2 className="processline-heading">{configuration.displayName}</h2>
-        <p className="processline-subheading">{configuration.introductionText}</p>
-        <p className="processline-empty-message">No line items have been configured yet.</p>
+        <header className="processline-header">
+          <h2 className="processline-heading">{configuration.displayName}</h2>
+          <p className="processline-subheading">{configuration.introductionText}</p>
+        </header>
+        <Card className="processline-empty-card">
+          <Card.Body>
+            <p className="processline-empty-message mb-0">No line items have been configured yet.</p>
+          </Card.Body>
+        </Card>
       </div>
     );
   }
@@ -164,15 +177,14 @@ function StudentUi({
       </header>
 
       <section className="processline-timeline-section" aria-label="Process line navigation">
-        <button
+        <IconButton
           className="timeline-side-button"
-          type="button"
+          src={ChevronLeft}
+          iconAs={Icon}
+          alt="Previous item"
           onClick={() => moveSelection(-1)}
           disabled={selectedIndex === 0}
-          aria-label="Previous item"
-        >
-          ←
-        </button>
+        />
         <div
           ref={timelineViewportRef}
           className="timeline-viewport"
@@ -210,80 +222,80 @@ function StudentUi({
             })}
           </div>
         </div>
-        <button
+        <IconButton
           className="timeline-side-button"
-          type="button"
+          src={ChevronRight}
+          iconAs={Icon}
+          alt="Next item"
           onClick={() => moveSelection(1)}
           disabled={selectedIndex === items.length - 1}
-          aria-label="Next item"
-        >
-          →
-        </button>
+        />
       </section>
 
       {selectedItem && (
-        <section
+        <Card
+          as="section"
           className="processline-detail-card"
           style={{
             backgroundColor: configuration.styling.cardBackgroundColor,
             color: configuration.styling.cardDescriptionColor,
           }}
         >
-          <span
-            className="detail-progress-pill"
-            style={{ backgroundColor: configuration.styling.highlightColor }}
-          >
-            {selectedIndex + 1}
-            {' / '}
-            {items.length}
-          </span>
-          <h3
-            className="detail-title"
-            style={{
-              color: configuration.styling.cardTitleColor,
-              fontSize: `${configuration.styling.cardTitleFontSize}px`,
-            }}
-          >
-            {selectedItem.title}
-            {selectedItem.label ? ` - ${selectedItem.label}` : ''}
-          </h3>
-          <p
-            className="detail-description"
-            style={{
-              color: configuration.styling.cardDescriptionColor,
-              fontSize: `${configuration.styling.cardDescriptionFontSize}px`,
-            }}
-          >
-            {selectedItem.description}
-          </p>
-          <div className="detail-card-footer">
-            <span className="detail-count">
+          <Card.Body>
+            <Badge
+              className="detail-progress-pill"
+              style={{ backgroundColor: configuration.styling.highlightColor }}
+            >
               {selectedIndex + 1}
-              {' of '}
+              {' / '}
               {items.length}
-            </span>
-            <div className="detail-actions">
-              <button
-                className="detail-nav-button"
-                type="button"
-                onClick={() => moveSelection(-1)}
-                disabled={selectedIndex === 0}
-                aria-label="Previous detail"
-              >
-                ←
-              </button>
-              <button
-                className="detail-nav-button primary"
-                type="button"
-                onClick={() => moveSelection(1)}
-                disabled={selectedIndex === items.length - 1}
-                aria-label="Next detail"
-              >
-                →
-              </button>
+            </Badge>
+            <h3
+              className="detail-title"
+              style={{
+                color: configuration.styling.cardTitleColor,
+                fontSize: `${configuration.styling.cardTitleFontSize}px`,
+              }}
+            >
+              {selectedItem.title}
+              {selectedItem.label ? ` - ${selectedItem.label}` : ''}
+            </h3>
+            <p
+              className="detail-description"
+              style={{
+                color: configuration.styling.cardDescriptionColor,
+                fontSize: `${configuration.styling.cardDescriptionFontSize}px`,
+              }}
+            >
+              {selectedItem.description}
+            </p>
+            <div className="detail-card-footer">
+              <span className="detail-count">
+                {selectedIndex + 1}
+                {' of '}
+                {items.length}
+              </span>
+              <div className="detail-actions">
+                <IconButton
+                  className="detail-nav-button"
+                  src={ChevronLeft}
+                  iconAs={Icon}
+                  alt="Previous detail"
+                  onClick={() => moveSelection(-1)}
+                  disabled={selectedIndex === 0}
+                />
+                <IconButton
+                  className="detail-nav-button primary"
+                  src={ChevronRight}
+                  iconAs={Icon}
+                  alt="Next detail"
+                  onClick={() => moveSelection(1)}
+                  disabled={selectedIndex === items.length - 1}
+                />
+              </div>
             </div>
-          </div>
-        </section>
+          </Card.Body>
+        </Card>
       )}
     </div>
   );
