@@ -5,6 +5,9 @@ Process Line XBlock
 horizontal process line. Learners can browse the timeline in the student view, and
 course authors can configure content, styling, and item placement in Studio.
 
+.. image:: assets/processline-xblock.png
+   :alt: Process Line XBlock student view screenshot
+
 Current state
 *************
 
@@ -78,6 +81,13 @@ Set up frontend dependencies
 
     cd frontend
     npm ci
+
+For the fastest UI development loop after installing dependencies:
+
+.. code-block:: bash
+
+    cd frontend
+    npm run dev
 
 Frontend-only development
 =========================
