@@ -12,21 +12,26 @@
     }
 
     .processline-header {
-        margin: 0 auto $spacer * 2;
+        margin: 0 auto $spacer * 0.5 !important;
         max-width: 48rem;
-        text-align: center;
+        text-align: center !important;
+        width: 100%;
     }
 
-    .processline-heading {
-        font-size: $h1-font-size;
+    h2.processline-heading {
+        font-size: $h1-font-size !important;
         font-weight: $font-weight-bold;
-        margin-bottom: $spacer * 0.75;
+        margin: 0 0 $spacer * 0.75 !important;
+        text-align: center !important;
+        width: 100%;
     }
 
-    .processline-subheading {
+    p.processline-subheading {
         color: $gray-700;
-        font-size: $lead-font-size;
-        margin-bottom: 0;
+        font-size: $lead-font-size !important;
+        margin: 0 !important;
+        text-align: center !important;
+        width: 100%;
     }
 
     .processline-timeline-section {
@@ -69,7 +74,7 @@
         flex: 1 1 auto;
         overflow-x: auto;
         overflow-y: visible;
-        padding: 6rem 0 5.5rem;
+        padding: 4rem 0 5.5rem;
         scrollbar-width: thin;
         touch-action: pan-x;
 
