@@ -22,7 +22,6 @@ export default defineConfig({
             exclude: [
                 "src/*/dev-preview.ts",
                 "src/*/index.tsx",
-                "src/studio-ui/TinyMceEditor.tsx",
             ],
         }
     },
