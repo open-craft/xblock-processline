@@ -11443,7 +11443,6 @@ function $v({
                       style: w(v, k),
                       onPointerDown: (O) => O.stopPropagation(),
                       onClick: () => y(k),
-                      onFocus: () => u(k),
                       "aria-pressed": E,
                       children: [
                         /* @__PURE__ */ z.jsx("span", { className: "timeline-node" }),

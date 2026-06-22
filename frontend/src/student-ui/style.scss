@@ -106,6 +106,16 @@
         transform: translate(-50%, -50%);
     }
 
+    .timeline-marker:focus {
+        outline: none;
+    }
+
+    .timeline-marker:focus-visible .timeline-node {
+        box-shadow:
+            0 0 0 0.2rem $white,
+            0 0 0 0.35rem rgba($primary, 0.35);
+    }
+
     .timeline-node {
         background: $white;
         border: 0.35rem solid $gray-200;
