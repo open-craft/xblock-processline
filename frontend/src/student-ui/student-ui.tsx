@@ -209,7 +209,6 @@ function StudentUi({
                   style={getMarkerStyle(item, index)}
                   onPointerDown={(event) => event.stopPropagation()}
                   onClick={() => handleSelect(index)}
-                  onFocus={() => updateSelectedIndex(index)}
                   aria-pressed={selected}
                 >
                   <span className="timeline-node" />

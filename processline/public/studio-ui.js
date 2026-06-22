@@ -19054,7 +19054,6 @@ function Ub({
                       style: E(b, O),
                       onPointerDown: (A) => A.stopPropagation(),
                       onClick: () => g(O),
-                      onFocus: () => u(O),
                       "aria-pressed": k,
                       children: [
                         /* @__PURE__ */ T.jsx("span", { className: "timeline-node" }),
