@@ -117,6 +117,9 @@ function EditingPage({
         items: normalizePositions(remainingItems),
       };
     });
+    if (indexToDelete < selectedItemIndex) {
+      setSelectedItemIndex(selectedItemIndex - 1);
+    }
   };
 
   const setItemsEvenly = () => {

@@ -25,9 +25,7 @@ class ProcesslineXBlock(XBlock):
     Process Line XBlock.
     """
 
-    display_name = String(
-        default=translation.gettext_noop("Process Line"), scope=Scope.settings
-    )
+    display_name = String(default=translation.gettext_noop("Process Line"), scope=Scope.settings)
     introduction_text = String(default=DEFAULT_INTRODUCTION_TEXT, scope=Scope.settings)
     styling = Dict(default=copy.deepcopy(DEFAULT_STYLING), scope=Scope.settings)
     items = List(default=copy.deepcopy(DEFAULT_ITEMS), scope=Scope.settings)
@@ -62,7 +60,10 @@ class ProcesslineXBlock(XBlock):
         )
 
     def _initialization_data(self) -> dict[str, object]:
-        return self._configuration_model().model_dump()
+        try:
+            return self._configuration_model().model_dump()
+        except (ValidationError, TypeError, ValueError):
+            return ProcessLineConfiguration().model_dump()
 
     def student_view(self, context=None):
         """
