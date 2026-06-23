@@ -19509,9 +19509,8 @@ function OI({
   }[a], T = () => {
     a === "styling" ? o("basic") : a === "items" ? o("styling") : a === "placement" && o("items");
   };
-  return /* @__PURE__ */ A.jsx("div", { className: "xblock-processline-editor editor-with-buttons", children: /* @__PURE__ */ A.jsxs("div", { className: "editor-layout", children: [
-    /* @__PURE__ */ A.jsx("div", { className: "editor-scroll-region", children: /* @__PURE__ */ A.jsxs("div", { className: "editor-shell", children: [
-      /* @__PURE__ */ A.jsx("h2", { className: "editor-title", children: "Editing: Process Line" }),
+  return /* @__PURE__ */ A.jsx("div", { className: "xblock-processline xblock-processline-editor xblock--processline--editor editor-with-buttons", children: /* @__PURE__ */ A.jsxs("div", { className: "d-flex flex-column editor-layout", children: [
+    /* @__PURE__ */ A.jsx("div", { className: "d-flex flex-column overflow-auto m-2.5 editor-scroll-region", children: /* @__PURE__ */ A.jsxs("div", { className: "editor-shell", children: [
       C[a],
       n && /* @__PURE__ */ A.jsx(ti, { className: "save-error", variant: "danger", children: n })
     ] }) }),
