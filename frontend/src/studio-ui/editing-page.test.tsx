@@ -24,16 +24,16 @@ describe('EditingPage', () => {
     );
 
     expect(screen.getByLabelText('Display Name')).toBeInTheDocument();
-    await user.click(screen.getByRole('button', { name: 'Continue' }));
+    await user.click(screen.getByRole('link', { name: 'Continue' }));
     expect(screen.getByText('Styling of Line Items')).toBeInTheDocument();
 
-    await user.click(screen.getByRole('button', { name: 'Continue' }));
+    await user.click(screen.getByRole('link', { name: 'Continue' }));
     expect(screen.getByRole('button', { name: '+ Add line item' })).toBeInTheDocument();
 
-    await user.click(screen.getByRole('button', { name: 'Continue' }));
+    await user.click(screen.getByRole('link', { name: 'Continue' }));
     expect(screen.getByText('Placement of Line Items')).toBeInTheDocument();
 
-    await user.click(screen.getByRole('button', { name: 'Save' }));
+    await user.click(screen.getByRole('link', { name: 'Save' }));
     expect(onSave).toHaveBeenCalledTimes(1);
   });
 
@@ -49,8 +49,8 @@ describe('EditingPage', () => {
       />,
     );
 
-    await user.click(screen.getAllByRole('button', { name: 'Continue' })[0]);
-    await user.click(screen.getByRole('button', { name: 'Continue' }));
+    await user.click(screen.getAllByRole('link', { name: 'Continue' })[0]);
+    await user.click(screen.getByRole('link', { name: 'Continue' }));
     await user.click(screen.getByRole('button', { name: '+ Add line item' }));
 
     expect(screen.getByRole('button', { name: 'Step 4' })).toBeInTheDocument();
@@ -71,9 +71,9 @@ describe('EditingPage', () => {
       />,
     );
 
-    await user.click(screen.getByRole('button', { name: 'Continue' }));
-    await user.click(screen.getByRole('button', { name: 'Continue' }));
-    await user.click(screen.getByRole('button', { name: 'Continue' }));
+    await user.click(screen.getByRole('link', { name: 'Continue' }));
+    await user.click(screen.getByRole('link', { name: 'Continue' }));
+    await user.click(screen.getByRole('link', { name: 'Continue' }));
     await user.click(screen.getByRole('button', { name: 'Select Step 3' }));
 
     expect(screen.getByRole('button', { name: 'Select Step 3' })).toHaveAttribute('aria-pressed', 'true');

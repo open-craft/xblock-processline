@@ -1,13 +1,11 @@
 import * as React from 'react';
 import {
-  ActionRow,
   Alert,
   Button,
   Card,
   Form,
   Icon,
   IconButton,
-  Sticky,
 } from '@openedx/paragon';
 import { DeleteOutline } from '@openedx/paragon/icons';
 import {
@@ -40,6 +38,41 @@ const getSortedConfiguration = (
   ...configuration,
   items: sortItemsByPosition(configuration.items),
 });
+
+interface ActionButtonLinkProps {
+  className: string;
+  label: string;
+  onClick: () => void;
+  disabled: boolean;
+}
+
+function ActionButtonLink({
+  className,
+  label,
+  onClick,
+  disabled,
+}: ActionButtonLinkProps) {
+  return (
+    <li className="action-item">
+      {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+      <a
+        href="#"
+        className={`button action-primary ${className} ${disabled ? 'is-disabled' : ''}`.trim()}
+        aria-disabled={disabled}
+        tabIndex={disabled ? -1 : 0}
+        onClick={(event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          if (!disabled) {
+            onClick();
+          }
+        }}
+      >
+        {label}
+      </a>
+    </li>
+  );
+}
 
 function EditingPage({
   initialConfiguration,
@@ -169,9 +202,9 @@ function EditingPage({
   const pages: Record<EditorPage, React.ReactNode> = {
     basic: (
       <Card className="studio-page-content">
-        <Card.Body>
-          <div className="form-stack">
-            <Form.Group controlId="processline-display-name">
+        <Card.Body className="studio-page-body basic-page-body">
+          <div className="form-stack basic-form-stack">
+            <Form.Group className="field-width-md" controlId="processline-display-name">
               <Form.Label>Display Name</Form.Label>
               <Form.Control
                 type="text"
@@ -186,7 +219,7 @@ function EditingPage({
               <Form.Label>Introduction Text</Form.Label>
               <Form.Control
                 as="textarea"
-                rows={6}
+                rows={8}
                 value={configuration.introductionText}
                 onChange={(event) => updateConfiguration((currentConfiguration) => ({
                   ...currentConfiguration,
@@ -199,113 +232,137 @@ function EditingPage({
       </Card>
     ),
     styling: (
-      <div className="styling-page">
-        <Card className="studio-page-content">
-          <Card.Body>
+      <Card className="studio-page-content">
+        <Card.Body className="studio-page-body styling-page-body">
+          <section className="editor-section">
             <h3 className="section-title">Styling of Line Items</h3>
-            <div className="style-grid two-column">
-              <Form.Group controlId="lineItemTitleColor">
-                <Form.Label>Title text color</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={configuration.styling.lineItemTitleColor}
-                  onChange={(event) => updateStyling('lineItemTitleColor', event.target.value)}
-                />
-              </Form.Group>
-              <Form.Group controlId="lineItemTitleFontSize">
-                <Form.Label>Title font size</Form.Label>
-                <Form.Control
-                  type="number"
-                  min={1}
-                  value={configuration.styling.lineItemTitleFontSize}
-                  onChange={(event) => updateStyling('lineItemTitleFontSize', Number(event.target.value) || 1)}
-                />
-              </Form.Group>
-              <Form.Group controlId="lineItemLabelColor">
-                <Form.Label>Label text color</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={configuration.styling.lineItemLabelColor}
-                  onChange={(event) => updateStyling('lineItemLabelColor', event.target.value)}
-                />
-              </Form.Group>
-              <Form.Group controlId="lineItemLabelFontSize">
-                <Form.Label>Label font size</Form.Label>
-                <Form.Control
-                  type="number"
-                  min={1}
-                  value={configuration.styling.lineItemLabelFontSize}
-                  onChange={(event) => updateStyling('lineItemLabelFontSize', Number(event.target.value) || 1)}
-                />
-              </Form.Group>
-              <Form.Group className="single-span mb-0" controlId="highlightColor">
-                <Form.Label>Highlight color</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={configuration.styling.highlightColor}
-                  onChange={(event) => updateStyling('highlightColor', event.target.value)}
-                />
-                <Form.Text muted>
-                  Color of the title, dot, and progress pill when selected.
-                </Form.Text>
-              </Form.Group>
+            <div className="editor-subsection-stack">
+              <div className="editor-subsection">
+                <h4 className="editor-subsection-title">Title text</h4>
+                <div className="field-pair-grid">
+                  <Form.Group controlId="lineItemTitleColor">
+                    <Form.Label>Font color</Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={configuration.styling.lineItemTitleColor}
+                      onChange={(event) => updateStyling('lineItemTitleColor', event.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group controlId="lineItemTitleFontSize">
+                    <Form.Label>Font size</Form.Label>
+                    <Form.Control
+                      type="number"
+                      min={1}
+                      value={configuration.styling.lineItemTitleFontSize}
+                      onChange={(event) => updateStyling('lineItemTitleFontSize', Number(event.target.value) || 1)}
+                    />
+                  </Form.Group>
+                </div>
+              </div>
+              <div className="editor-subsection">
+                <h4 className="editor-subsection-title">Label text</h4>
+                <div className="field-pair-grid">
+                  <Form.Group controlId="lineItemLabelColor">
+                    <Form.Label>Font color</Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={configuration.styling.lineItemLabelColor}
+                      onChange={(event) => updateStyling('lineItemLabelColor', event.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group controlId="lineItemLabelFontSize">
+                    <Form.Label>Font size</Form.Label>
+                    <Form.Control
+                      type="number"
+                      min={1}
+                      value={configuration.styling.lineItemLabelFontSize}
+                      onChange={(event) => updateStyling('lineItemLabelFontSize', Number(event.target.value) || 1)}
+                    />
+                  </Form.Group>
+                </div>
+              </div>
+              <div className="editor-subsection mb-0">
+                <h4 className="editor-subsection-title">Highlight color</h4>
+                <p className="editor-subsection-copy">
+                  Color of the title, dot, and line when an item is selected.
+                </p>
+                <Form.Group className="field-width-md mb-0" controlId="highlightColor">
+                  <Form.Control
+                    type="text"
+                    value={configuration.styling.highlightColor}
+                    onChange={(event) => updateStyling('highlightColor', event.target.value)}
+                  />
+                </Form.Group>
+              </div>
             </div>
-          </Card.Body>
-        </Card>
-        <Card className="studio-page-content">
-          <Card.Body>
+          </section>
+
+          <section className="editor-section">
             <h3 className="section-title">Styling of Cards</h3>
-            <div className="style-grid two-column">
-              <Form.Group className="single-span" controlId="cardBackgroundColor">
-                <Form.Label>Card background color</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={configuration.styling.cardBackgroundColor}
-                  onChange={(event) => updateStyling('cardBackgroundColor', event.target.value)}
-                />
-              </Form.Group>
-              <Form.Group controlId="cardTitleColor">
-                <Form.Label>Title text color</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={configuration.styling.cardTitleColor}
-                  onChange={(event) => updateStyling('cardTitleColor', event.target.value)}
-                />
-              </Form.Group>
-              <Form.Group controlId="cardTitleFontSize">
-                <Form.Label>Title font size</Form.Label>
-                <Form.Control
-                  type="number"
-                  min={1}
-                  value={configuration.styling.cardTitleFontSize}
-                  onChange={(event) => updateStyling('cardTitleFontSize', Number(event.target.value) || 1)}
-                />
-              </Form.Group>
-              <Form.Group controlId="cardDescriptionColor">
-                <Form.Label>Description text color</Form.Label>
-                <Form.Control
-                  type="text"
-                  value={configuration.styling.cardDescriptionColor}
-                  onChange={(event) => updateStyling('cardDescriptionColor', event.target.value)}
-                />
-              </Form.Group>
-              <Form.Group className="mb-0" controlId="cardDescriptionFontSize">
-                <Form.Label>Description font size</Form.Label>
-                <Form.Control
-                  type="number"
-                  min={1}
-                  value={configuration.styling.cardDescriptionFontSize}
-                  onChange={(event) => updateStyling('cardDescriptionFontSize', Number(event.target.value) || 1)}
-                />
-              </Form.Group>
+            <div className="editor-subsection-stack">
+              <div className="editor-subsection">
+                <h4 className="editor-subsection-title">Card</h4>
+                <Form.Group className="field-width-md mb-0" controlId="cardBackgroundColor">
+                  <Form.Label>Background color</Form.Label>
+                  <Form.Control
+                    type="text"
+                    value={configuration.styling.cardBackgroundColor}
+                    onChange={(event) => updateStyling('cardBackgroundColor', event.target.value)}
+                  />
+                </Form.Group>
+              </div>
+              <div className="editor-subsection">
+                <h4 className="editor-subsection-title">Title text</h4>
+                <div className="field-pair-grid">
+                  <Form.Group controlId="cardTitleColor">
+                    <Form.Label>Font color</Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={configuration.styling.cardTitleColor}
+                      onChange={(event) => updateStyling('cardTitleColor', event.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group controlId="cardTitleFontSize">
+                    <Form.Label>Font size</Form.Label>
+                    <Form.Control
+                      type="number"
+                      min={1}
+                      value={configuration.styling.cardTitleFontSize}
+                      onChange={(event) => updateStyling('cardTitleFontSize', Number(event.target.value) || 1)}
+                    />
+                  </Form.Group>
+                </div>
+              </div>
+              <div className="editor-subsection mb-0">
+                <h4 className="editor-subsection-title">Description text</h4>
+                <div className="field-pair-grid">
+                  <Form.Group controlId="cardDescriptionColor">
+                    <Form.Label>Font color</Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={configuration.styling.cardDescriptionColor}
+                      onChange={(event) => updateStyling('cardDescriptionColor', event.target.value)}
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-0" controlId="cardDescriptionFontSize">
+                    <Form.Label>Font size</Form.Label>
+                    <Form.Control
+                      type="number"
+                      min={1}
+                      value={configuration.styling.cardDescriptionFontSize}
+                      onChange={(event) => updateStyling('cardDescriptionFontSize', Number(event.target.value) || 1)}
+                    />
+                  </Form.Group>
+                </div>
+              </div>
             </div>
-          </Card.Body>
-        </Card>
-      </div>
+          </section>
+        </Card.Body>
+      </Card>
     ),
     items: (
       <Card className="studio-page-content">
-        <Card.Body className="items-page">
+        <Card.Body className="studio-page-body items-page">
           <aside className="items-sidebar">
             <Button className="add-item-button" type="button" onClick={addItem}>
               + Add line item
@@ -319,7 +376,8 @@ function EditingPage({
                   <Button
                     className="item-select-button"
                     type="button"
-                    variant={index === selectedItemIndex ? 'primary' : 'tertiary'}
+                    variant="tertiary"
+                    aria-pressed={index === selectedItemIndex}
                     onClick={() => setSelectedItemIndex(index)}
                   >
                     {item.title || `Item ${index + 1}`}
@@ -328,7 +386,7 @@ function EditingPage({
                     className="item-delete-button"
                     src={DeleteOutline}
                     iconAs={Icon}
-                    variant="danger"
+                    variant="dark"
                     alt={`Delete ${item.title || `Item ${index + 1}`}`}
                     onClick={() => deleteItem(index)}
                   />
@@ -413,7 +471,7 @@ function EditingPage({
     placement: (
       <div className="placement-page">
         <Card className="studio-page-content placement-card">
-          <Card.Body>
+          <Card.Body className="studio-page-body placement-page-body">
             <h3>Placement of Line Items</h3>
             <p className="placement-copy">
               Drag items to position them along the line. Use the button below to space them evenly.
@@ -487,36 +545,55 @@ function EditingPage({
   };
 
   return (
-    <div className="xblock-processline-editor">
-      <div className="editor-shell">
-        <h2 className="editor-title">Editing: Process Line</h2>
-        {pages[page]}
-        {saveError && (
-          <Alert className="save-error" variant="danger">
-            {saveError}
-          </Alert>
-        )}
-        <Sticky position="bottom" className="editor-actions border-top p-3">
-          <ActionRow>
-            <ActionRow.Spacer />
-            <Button variant="tertiary" type="button" onClick={onCancel} disabled={isSaving}>
-              Cancel
-            </Button>
-            {page !== 'basic' && (
-              <Button variant="outline-primary" type="button" onClick={handleBack} disabled={isSaving}>
-                Back
-              </Button>
+    <div className="xblock-processline-editor editor-with-buttons">
+      <div className="editor-layout">
+        <div className="editor-scroll-region">
+          <div className="editor-shell">
+            <h2 className="editor-title">Editing: Process Line</h2>
+            {pages[page]}
+            {saveError && (
+              <Alert className="save-error" variant="danger">
+                {saveError}
+              </Alert>
             )}
-            <Button
-              variant="primary"
-              type="button"
+          </div>
+        </div>
+        <div className="xblock-actions">
+          <ul className="action-buttons">
+            <ActionButtonLink
               onClick={nextButton.onClick}
+              className={page === 'placement' ? 'save-button' : 'continue-button'}
+              label={isSaving ? 'Saving…' : nextButton.label}
               disabled={isSaving || (page === 'items' && !configuration.items.length)}
-            >
-              {isSaving ? 'Saving…' : nextButton.label}
-            </Button>
-          </ActionRow>
-        </Sticky>
+            />
+            {page !== 'basic' && (
+              <ActionButtonLink
+                onClick={handleBack}
+                className="continue-button"
+                label="Back"
+                disabled={isSaving}
+              />
+            )}
+            <li className="action-item">
+              {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+              <a
+                href="#"
+                className={`button cancel-button ${isSaving ? 'is-disabled' : ''}`.trim()}
+                aria-disabled={isSaving}
+                tabIndex={isSaving ? -1 : 0}
+                onClick={(event) => {
+                  event.preventDefault();
+                  event.stopPropagation();
+                  if (!isSaving) {
+                    onCancel();
+                  }
+                }}
+              >
+                Cancel
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   );

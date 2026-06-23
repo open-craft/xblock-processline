@@ -39,10 +39,10 @@ describe('StudioUi component test', () => {
       />,
     );
 
-    await user.click(screen.getByRole('button', { name: 'Continue' }));
-    await user.click(screen.getByRole('button', { name: 'Continue' }));
-    await user.click(screen.getByRole('button', { name: 'Continue' }));
-    await user.click(screen.getByRole('button', { name: 'Save' }));
+    await user.click(screen.getByRole('link', { name: 'Continue' }));
+    await user.click(screen.getByRole('link', { name: 'Continue' }));
+    await user.click(screen.getByRole('link', { name: 'Continue' }));
+    await user.click(screen.getByRole('link', { name: 'Save' }));
 
     expect(ajaxMock).toHaveBeenCalledTimes(1);
     expect(savedRequest).toMatchObject({
