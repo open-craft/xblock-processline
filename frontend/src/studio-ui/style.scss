@@ -1,254 +1,416 @@
 @import "../index";
 
 .xblock-processline-editor {
-    color: $gray-900;
-    font-family: Arial, sans-serif;
+  color: var(--pgn-color-gray-900, $gray-900);
+  display: flex;
+  flex-direction: column;
+  font-family: var(--pgn-typography-font-family-base, $font-family-base);
+  height: 100%;
+  min-height: 32rem;
 
-    .editor-shell {
-        background: $white;
-        border: 1px solid $gray-200;
-        padding: $spacer * 1.5;
-    }
+  .editor-layout {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+  }
 
-    .editor-title {
-        font-size: $h2-font-size;
-        font-weight: $font-weight-bold;
-        margin-bottom: $spacer * 1.5;
-    }
+  .editor-scroll-region {
+    flex: 1 1 auto;
+    margin: 0.625rem;
+    min-height: 0;
+    overflow-y: auto;
+    scroll-behavior: auto;
+  }
 
-    .studio-page-content {
-        min-height: 34rem;
-    }
+  .editor-shell {
+    background: var(--pgn-color-gray-100, $gray-100);
+    border: 1px solid var(--pgn-color-gray-200, $gray-200);
+    border-radius: var(--pgn-size-border-radius-lg, $border-radius-lg);
+    box-shadow: 0 18px 40px rgba($black, 0.08);
+    min-height: 100%;
+    padding: clamp(1rem, 1.8vw, 1.5rem);
+  }
 
-    .studio-page-content + .studio-page-content,
-    .student-preview-section {
-        margin-top: $spacer * 1.5;
-    }
+  .editor-title {
+    color: var(--pgn-color-gray-900, $gray-900);
+    font-size: clamp(1.75rem, 2vw, 2.125rem);
+    font-weight: var(--pgn-typography-font-weight-bold, $font-weight-bold);
+    line-height: 1.2;
+    margin-bottom: $spacer * 1.25;
+  }
 
-    .form-stack {
-        display: flex;
-        flex-direction: column;
-        gap: $spacer * 1.5;
-    }
+  .studio-page-content {
+    background: var(--pgn-color-white, $white);
+    border: 1px solid var(--pgn-color-gray-200, $gray-200);
+    border-radius: var(--pgn-size-border-radius-base, $border-radius);
+    box-shadow: none;
+    overflow: hidden;
+  }
 
-    .placement-copy,
-    .empty-editor-state {
-        color: $gray-600;
-        font-size: $font-size-base;
-        line-height: $line-height-base;
-    }
+  .studio-page-body {
+    min-height: 0;
+    padding: clamp(1.5rem, 2.2vw, 2.5rem);
+  }
 
-    .styling-page,
-    .placement-page {
-        display: flex;
-        flex-direction: column;
-        gap: $spacer * 1.5;
-    }
+  .basic-page-body {
+    max-width: 100%;
+  }
 
-    .section-title,
-    .placement-page h3,
-    .student-preview-title {
-        font-size: $h3-font-size;
-        font-weight: $font-weight-bold;
-    }
+  .basic-form-stack {
+    max-width: 88rem;
+  }
 
-    .section-title,
-    .placement-page h3 {
-        margin-bottom: $spacer;
-    }
+  .studio-page-content + .studio-page-content,
+  .student-preview-section {
+    margin-top: $spacer * 1.5;
+  }
 
-    .style-grid {
-        display: grid;
-        gap: $spacer * 1.25;
-    }
+  .form-stack {
+    display: flex;
+    flex-direction: column;
+    gap: $spacer * 1.75;
+  }
 
-    .style-grid.two-column {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
+  .field-width-md {
+    max-width: 42rem;
+  }
 
-    .single-span {
-        grid-column: 1 / -1;
-    }
+  .placement-copy,
+  .empty-editor-state,
+  .editor-subsection-copy {
+    color: var(--pgn-color-gray-600, $gray-600);
+    font-size: var(--pgn-typography-font-size-base, $font-size-base);
+    line-height: var(--pgn-typography-line-height-base, $line-height-base);
+  }
 
+  .styling-page-body,
+  .placement-page,
+  .placement-page-body {
+    display: flex;
+    flex-direction: column;
+    gap: $spacer * 1.5;
+  }
+
+  .editor-section + .editor-section {
+    border-top: 1px solid var(--pgn-color-gray-200, $gray-200);
+    margin-top: $spacer * 1.5;
+    padding-top: $spacer * 1.5;
+  }
+
+  .section-title,
+  .placement-page h3,
+  .student-preview-title {
+    color: var(--pgn-color-gray-900, $gray-900);
+    font-size: clamp(1.5rem, 1.8vw, 1.875rem);
+    font-weight: var(--pgn-typography-font-weight-bold, $font-weight-bold);
+    line-height: 1.25;
+    margin-bottom: $spacer * 1.25;
+  }
+
+  .editor-subsection-stack {
+    display: flex;
+    flex-direction: column;
+    gap: $spacer * 2;
+  }
+
+  .editor-subsection {
+    max-width: 56rem;
+  }
+
+  .editor-subsection-title {
+    color: var(--pgn-color-gray-800, $gray-800);
+    font-size: clamp(1.125rem, 1.4vw, 1.375rem);
+    font-weight: var(--pgn-typography-font-weight-semi-bold, 600);
+    line-height: 1.3;
+    margin-bottom: $spacer * 0.625;
+  }
+
+  .editor-subsection-copy {
+    margin-bottom: $spacer * 0.75;
+    max-width: 40rem;
+  }
+
+  .field-pair-grid {
+    display: grid;
+    gap: $spacer * 1.25;
+    grid-template-columns: minmax(0, 16rem) minmax(0, 9rem);
+    max-width: 30rem;
+  }
+
+  .items-page {
+    display: grid;
+    gap: $spacer * 2;
+    grid-template-columns: minmax(14rem, 20rem) minmax(0, 1fr);
+  }
+
+  .items-sidebar {
+    border-right: 1px solid var(--pgn-color-gray-200, $gray-200);
+    padding-right: $spacer * 1.5;
+  }
+
+  .add-item-button {
+    margin-bottom: $spacer * 1.5;
+    width: fit-content;
+  }
+
+  .items-list {
+    display: flex;
+    flex-direction: column;
+    gap: $spacer * 0.375;
+  }
+
+  .item-row {
+    align-items: center;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: var(--pgn-size-border-radius-base, $border-radius);
+    display: flex;
+    gap: $spacer * 0.375;
+    min-height: 3.5rem;
+    padding: $spacer * 0.25;
+    transition: background-color 0.18s ease, border-color 0.18s ease;
+  }
+
+  .item-row.selected {
+    background: var(--pgn-color-gray-100, $gray-100);
+    border-color: var(--pgn-color-gray-200, $gray-200);
+  }
+
+  .item-select-button {
+    color: var(--pgn-color-gray-900, $gray-900);
+    flex: 1 1 auto;
+    font-size: 1.125rem;
+    font-weight: var(--pgn-typography-font-weight-semi-bold, 600);
+    justify-content: flex-start;
+    min-height: 3rem;
+    padding-inline: $spacer;
+    text-align: left;
+  }
+
+  .item-select-button.btn,
+  .item-select-button.btn:hover,
+  .item-select-button.btn:focus,
+  .item-select-button.btn:active {
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+  }
+
+  .item-row.selected .item-select-button {
+    color: var(--pgn-color-gray-900, $gray-900);
+  }
+
+  .item-delete-button {
+    color: var(--pgn-color-gray-700, $gray-700);
+    flex: 0 0 auto;
+  }
+
+  .item-delete-button.btn,
+  .item-delete-button.btn:hover,
+  .item-delete-button.btn:focus {
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+  }
+
+  .item-editor-panel {
+    max-width: 66rem;
+  }
+
+  .radio-field-group {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacer * 1.75;
+    padding: $spacer * 0.25 0;
+  }
+
+  .radio-field-group .form-check {
+    align-items: center;
+    display: inline-flex;
+    gap: $spacer * 0.625;
+    margin-bottom: 0;
+    min-height: auto;
+    padding: 0;
+  }
+
+  .radio-field-group .form-check-input {
+    flex: 0 0 auto;
+    margin: 0;
+    position: static;
+  }
+
+  .radio-field-group .form-check-label {
+    margin-bottom: 0;
+    padding-left: 0;
+  }
+
+  .placement-shell {
+    margin: $spacer * 2.5 0 $spacer * 2;
+    overflow-x: auto;
+    padding: $spacer * 3 0;
+  }
+
+  .placement-track {
+    background: var(--pgn-color-gray-200, $gray-200);
+    border-radius: $rounded-pill;
+    height: 0.25rem;
+    min-width: 54rem;
+    position: relative;
+  }
+
+  .placement-marker {
+    background: transparent;
+    border: none;
+    cursor: ew-resize;
+    min-width: 8rem;
+    padding: 0;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .placement-marker.selected .placement-node {
+    border-color: var(--pgn-color-primary-base, $primary);
+    box-shadow: 0 0 0 0.32rem rgba($primary, 0.14);
+  }
+
+  .placement-marker.selected .placement-label {
+    color: var(--pgn-color-primary-base, $primary);
+  }
+
+  .placement-node {
+    background: var(--pgn-color-white, $white);
+    border: 0.35rem solid var(--pgn-color-gray-200, $gray-200);
+    border-radius: $rounded-pill;
+    box-shadow: 0 0 0 0.18rem var(--pgn-color-white, $white);
+    display: block;
+    height: 1.6rem;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 1.6rem;
+  }
+
+  .placement-label {
+    color: var(--pgn-color-gray-900, $gray-900);
+    display: inline-block;
+    font-size: clamp(1rem, 1.2vw, 1.125rem);
+    font-weight: var(--pgn-typography-font-weight-semi-bold, 600);
+    left: 50%;
+    max-width: 10rem;
+    position: absolute;
+    text-align: center;
+    transform: translateX(-50%);
+    white-space: normal;
+  }
+
+  .placement-marker.above .placement-label {
+    bottom: 1.85rem;
+  }
+
+  .placement-marker.below .placement-label {
+    top: 1.85rem;
+  }
+
+  .student-preview-section {
+    border-style: dashed;
+  }
+
+  .student-preview-title {
+    margin-bottom: $spacer;
+  }
+
+  .student-preview-shell {
+    overflow: hidden;
+    padding: clamp(1.25rem, 2vw, 1.75rem);
+  }
+
+  .xblock-actions {
+    bottom: auto !important;
+    flex: 0 0 auto;
+    padding: $spacer * 0.875 $spacer;
+    position: static !important;
+    width: auto !important;
+  }
+
+  .action-buttons {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacer * 0.75;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .action-item {
+    margin: 0;
+  }
+
+  .action-item .button {
+    border-radius: var(--pgn-size-border-radius-base, $border-radius);
+    display: inline-flex;
+    font-weight: var(--pgn-typography-font-weight-bold, $font-weight-bold);
+    min-height: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0.625rem 1.125rem;
+    text-decoration: none;
+  }
+
+  .action-item .button.is-disabled {
+    opacity: 0.65;
+    pointer-events: none;
+  }
+
+  .save-error {
+    margin-top: $spacer * 1.5;
+  }
+
+  .form-control,
+  textarea.form-control {
+    border-color: var(--pgn-color-gray-400, $gray-400);
+  }
+
+  textarea.form-control {
+    min-height: 8rem;
+    resize: vertical;
+  }
+
+  @media (max-width: 960px) {
+    .field-pair-grid,
     .items-page {
-        display: grid;
-        gap: $spacer * 1.75;
-        grid-template-columns: 20rem minmax(0, 1fr);
+      grid-template-columns: 1fr;
+      max-width: none;
     }
 
     .items-sidebar {
-        border-right: 1px solid $gray-200;
-        padding-right: $spacer * 1.5;
+      border-bottom: 1px solid var(--pgn-color-gray-200, $gray-200);
+      border-right: none;
+      padding-bottom: $spacer * 1.5;
+      padding-right: 0;
     }
 
-    .add-item-button {
-        margin-bottom: $spacer * 1.5;
-        width: fit-content;
+    .editor-scroll-region {
+      margin: 0.625rem 0.625rem 0;
     }
 
-    .items-list {
-        display: flex;
-        flex-direction: column;
-        gap: $spacer * 0.5;
+    .action-buttons {
+      align-items: stretch;
+      flex-direction: column;
     }
 
-    .item-row {
-        align-items: center;
-        background: $white;
-        border: 1px solid $gray-200;
-        border-radius: $border-radius;
-        display: flex;
-        gap: $spacer * 0.5;
-        padding: $spacer * 0.5;
-    }
-
-    .item-row.selected {
-        background: $primary-100;
-        border-color: $primary-300;
-    }
-
-    .item-select-button {
-        flex: 1 1 auto;
-        justify-content: flex-start;
-        text-align: left;
-    }
-
-    .item-delete-button {
-        flex: 0 0 auto;
-    }
-
-    .radio-field-group {
-        align-items: center;
-        display: flex;
-        flex-wrap: wrap;
-        gap: $spacer * 1.5;
-        padding: $spacer * 0.5 0;
-    }
-
-    .radio-field-group .form-check {
-        align-items: center;
-        display: inline-flex;
-        gap: $spacer * 0.5;
-        margin-bottom: 0;
-        min-height: auto;
-        padding: $spacer * 0.25 0;
-        padding-left: 0;
-    }
-
-    .radio-field-group .form-check-input {
-        flex: 0 0 auto;
-        margin: 0;
-        position: static;
-    }
-
-    .radio-field-group .form-check-label {
-        margin-bottom: 0;
-        padding-left: 0;
+    .action-item,
+    .action-item .button {
+      width: 100%;
     }
 
     .placement-shell {
-        margin: $spacer * 3 0 $spacer * 2;
-        overflow-x: auto;
-        padding: $spacer * 3 0 $spacer * 3.5;
+      margin-top: $spacer * 2;
     }
-
-    .placement-track {
-        background: $gray-200;
-        height: 0.25rem;
-        min-width: 54rem;
-        position: relative;
-    }
-
-    .placement-marker {
-        background: transparent;
-        border: none;
-        cursor: ew-resize;
-        min-width: 8rem;
-        padding: 0;
-        position: absolute;
-        top: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    .placement-marker.selected .placement-node {
-        border-color: $primary-500;
-        box-shadow: 0 0 0 0.28rem rgba($primary, 0.15);
-    }
-
-    .placement-marker.selected .placement-label {
-        color: $primary-500;
-    }
-
-    .placement-node {
-        background: $white;
-        border: 0.35rem solid $gray-200;
-        border-radius: $rounded-pill;
-        box-shadow: 0 0 0 0.2rem $white;
-        display: block;
-        height: 1.5rem;
-        left: 50%;
-        position: absolute;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        width: 1.5rem;
-    }
-
-    .placement-label {
-        color: $primary-700;
-        display: inline-block;
-        font-size: $font-size-base;
-        font-weight: $font-weight-bold;
-        left: 50%;
-        max-width: 9rem;
-        position: absolute;
-        text-align: center;
-        transform: translateX(-50%);
-        white-space: nowrap;
-    }
-
-    .placement-marker.above .placement-label {
-        bottom: 1.6rem;
-    }
-
-    .placement-marker.below .placement-label {
-        top: 1.6rem;
-    }
-
-    .student-preview-title {
-        margin-bottom: 0;
-    }
-
-    .student-preview-shell {
-        overflow: hidden;
-        padding: 0;
-    }
-
-    .editor-actions {
-        background: $white;
-        bottom: 0;
-        margin-top: $spacer * 1.5;
-        z-index: 2;
-    }
-
-    .save-error {
-        margin-top: $spacer * 1.5;
-    }
-
-    @media (max-width: 960px) {
-        .style-grid.two-column,
-        .items-page {
-            grid-template-columns: 1fr;
-        }
-
-        .items-sidebar {
-            border-right: none;
-            border-bottom: 1px solid #e5e7eb;
-            padding-bottom: 1.5rem;
-            padding-right: 0;
-        }
-
-        .editor-actions {
-            flex-wrap: wrap;
-        }
-    }
+  }
 }
