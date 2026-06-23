@@ -545,11 +545,10 @@ function EditingPage({
   };
 
   return (
-    <div className="xblock-processline-editor editor-with-buttons">
-      <div className="editor-layout">
-        <div className="editor-scroll-region">
+    <div className="xblock-processline xblock-processline-editor xblock--processline--editor editor-with-buttons">
+      <div className="d-flex flex-column editor-layout">
+        <div className="d-flex flex-column overflow-auto m-2.5 editor-scroll-region">
           <div className="editor-shell">
-            <h2 className="editor-title">Editing: Process Line</h2>
             {pages[page]}
             {saveError && (
               <Alert className="save-error" variant="danger">
