@@ -65,6 +65,29 @@ class ProcesslineXBlock(XBlock):
         except (ValidationError, TypeError, ValueError):
             return ProcessLineConfiguration().model_dump()
 
+    def index_dictionary(self):
+        """
+        Return dictionary prepared with block content and type for content search.
+        """
+        xblock_body = super().index_dictionary()
+        items_text = " ".join(
+            str(item.get(key, ""))
+            for item in (self.items or []) if isinstance(item, dict)
+            for key in ("title", "label", "description")
+            if item.get(key)
+        ).strip()
+        index_body = {
+            "display_name": self.display_name,
+            "introduction_text": self.introduction_text or "",
+            "items": items_text,
+        }
+        if "content" in xblock_body:
+            xblock_body["content"].update(index_body)
+        else:
+            xblock_body["content"] = index_body
+        xblock_body["content_type"] = "Process Line"
+        return xblock_body
+
     def student_view(self, context=None):
         """
         Create primary view of the ProcesslineXBlock, shown to students when viewing courses.

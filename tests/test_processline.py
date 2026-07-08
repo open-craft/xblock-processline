@@ -121,3 +121,53 @@ def test_initialization_data_normalizes_persisted_configuration():
     assert configuration["styling"]["cardTitleFontSize"] == 28
     assert [item["title"] for item in configuration["items"]] == ["Step 1", "Step 2"]
     assert [item["position"] for item in configuration["items"]] == [0.0, 1.0]
+
+
+def test_index_dictionary_includes_searchable_text():
+    """index_dictionary should expose display name, intro text, and item text."""
+    block = make_block(
+        DictFieldData(
+            {
+                "display_name": "My Process",
+                "introduction_text": "Follow along.",
+                "items": [
+                    {
+                        "title": "Step 1",
+                        "label": "First",
+                        "description": "First description",
+                        "displayAboveLine": True,
+                        "position": 0.0,
+                    },
+                    {
+                        "title": "Step 2",
+                        "label": "Second",
+                        "description": "Second description",
+                        "displayAboveLine": False,
+                        "position": 1.0,
+                    },
+                ],
+            }
+        )
+    )
+
+    index = block.index_dictionary()
+
+    assert index["content_type"] == "Process Line"
+    assert index["content"]["display_name"] == "My Process"
+    assert index["content"]["introduction_text"] == "Follow along."
+    assert index["content"]["items"] == (
+        "Step 1 First First description Step 2 Second Second description"
+    )
+    # Layout flags and styling must not leak into the search index.
+    assert "displayAboveLine" not in str(index["content"])
+    assert "styling" not in index["content"]
+
+
+def test_index_dictionary_handles_empty_items():
+    """index_dictionary should tolerate empty or malformed items."""
+    block = make_block(DictFieldData({"items": [], "introduction_text": None}))
+
+    index = block.index_dictionary()
+
+    assert index["content"]["items"] == ""
+    assert index["content"]["introduction_text"] == ""
