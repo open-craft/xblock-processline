@@ -4,9 +4,8 @@ function ProcesslineEditor(runtime, element, data) {
     console.error('Missing studio bundle URL for ProcesslineEditor');
     return;
   }
-  const editorRoot = element && element.jquery ? element[0] : element;
   (async () => {
     const { renderEditor } = await import(data.url);
-    renderEditor(runtime, editorRoot, data);
+    renderEditor(runtime, element, data);
   })();
 }
