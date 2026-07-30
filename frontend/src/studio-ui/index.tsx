@@ -21,7 +21,7 @@ const buildConfigurationFromData = (data: XBlockData): ProcessLineConfiguration 
 };
 
 // eslint-disable-next-line import/prefer-default-export
-export const renderEditor = (runtime: XBlockRuntime, element: Element | null, data: XBlockData) => {
+export const renderEditor = (runtime: XBlockRuntime, element: XBlockElementLike | null, data: XBlockData) => {
   const container = element && 'jquery' in element ? element[0] : element;
 
   if (!container || !(container instanceof Element)) {
@@ -30,7 +30,7 @@ export const renderEditor = (runtime: XBlockRuntime, element: Element | null, da
     return;
   }
 
-  const studioSaveUrl = runtime.handlerUrl(container, 'studio_save');
+  const studioSaveUrl = runtime.handlerUrl(element, 'studio_save');
   ReactDOM.render(
     (
       <React.StrictMode>

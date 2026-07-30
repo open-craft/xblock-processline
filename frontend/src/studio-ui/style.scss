@@ -440,3 +440,11 @@
     }
   }
 }
+
+.xblock-iframe-content .xblock-processline-editor .editor-layout {
+  height: max(375px, calc(100vh - 40px));
+}
+
+.xblock-iframe-content .xblock-processline-editor .editor-layout .xblock-actions {
+  margin-top: auto;
+}

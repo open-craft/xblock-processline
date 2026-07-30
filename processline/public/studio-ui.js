@@ -19607,7 +19607,7 @@ const kI = (e) => {
     console.error("Invalid DOM element provided to renderEditor:", t);
     return;
   }
-  const i = e.handlerUrl(r, "studio_save");
+  const i = e.handlerUrl(t, "studio_save");
   zy.render(
     /* @__PURE__ */ A.jsx(_.StrictMode, { children: /* @__PURE__ */ A.jsx(
       CI,
