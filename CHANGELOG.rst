@@ -14,6 +14,15 @@ Change Log
 Unreleased
 **********
 
+1.0.2 – 2026-07-31
+**********************************************
+
+Fixed
+=====
+
+* Studio editor not rendering in v2 content libraries (learning-core runtime ``handlerUrl`` compatibility).
+* Editor now fills the available height in the library edit modal (was fixed at 375px).
+
 0.1.0 – 2026-07-21
 **********************************************
 
