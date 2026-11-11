@@ -173,6 +173,24 @@ def test_index_dictionary_handles_empty_items():
     assert index["content"]["introduction_text"] == ""
 
 
+def test_student_view_data():
+    """Test that the index_dictionary alias works."""
+    block = make_block(
+        DictFieldData(
+            {
+                "display_name": "My Process",
+                "introduction_text": "Follow along.",
+                "items": [{"title": "Step 1", "label": "First", "description": "Desc"}],
+            }
+        )
+    )
+
+    result = block.student_view_data()
+
+    assert result == block.index_dictionary()
+    assert result["content_type"] == "Process Line"
+
+
 def test_student_view_renders_fragment():
     """The student view renders the template and initializes the student JS."""
     block = make_block()
