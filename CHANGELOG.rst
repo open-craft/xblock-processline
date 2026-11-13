@@ -14,6 +14,14 @@ Change Log
 Unreleased
 **********
 
+1.0.3 – 2026-11-11
+**********************************************
+
+Added
+=====
+
+* ``student_view_data`` alias of ``index_dictionary`` for the "Data Bricks" indexer project.
+
 1.0.2 – 2026-07-31
 **********************************************
 

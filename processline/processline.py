@@ -88,6 +88,9 @@ class ProcesslineXBlock(XBlock):
         xblock_body["content_type"] = "Process Line"
         return xblock_body
 
+    # Alias needed for client's "Data Bricks" indexer project.
+    student_view_data = index_dictionary
+
     def student_view(self, context=None):
         """
         Create primary view of the ProcesslineXBlock, shown to students when viewing courses.
